@@ -62,12 +62,6 @@ You have a few options for running the tests:
 3. **Account Deletion**: Delete the newly created account.
 4. **Confirmation**: Verify that the account deletion message is displayed.
 
-**Key Components & Actions**:
-* **Setup**: `BaseTest` handles the core prerequisite of launching the browser and navigating to the home page.
-* **Data Model**: The test data is centrally managed using the `UserInformation` POJO.
-* **Data Input**: `SignUpPage` methods accept the `UserInformation` object to fill the registration form fields.
-* **Page Class Usage**: `HomePage` and `SignUpPage` handle all UI interactions and verifications.
-
 **Detailed Verification (Assertions)**:
 
 The test relies on a comprehensive set of assertions at key points in the flow:
