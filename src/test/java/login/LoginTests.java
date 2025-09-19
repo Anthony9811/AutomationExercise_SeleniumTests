@@ -23,6 +23,16 @@ public class LoginTests extends BaseTests {
         SignUpPage signUpPage = loginPage.clickSignUpButton();
         Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
 
+        signUpPage.selectMrTitle();
+
+        signUpPage.setPassword("password");
+
+        signUpPage.selectDateOfBirth("day", "22");
+        signUpPage.selectDateOfBirth("month", "November");
+        signUpPage.selectDateOfBirth("year", "1990");
+
+        signUpPage.selectAllRegistrationCheckboxes();
+
         UserInformation userData = new UserInformation(
                 "Mark",
                 "Calaway",
@@ -34,15 +44,9 @@ public class LoginTests extends BaseTests {
                 "50301",
                 "12345678"
         );
-
-        signUpPage.selectMrTitle();
-        signUpPage.setPassword("password");
-        signUpPage.selectDateOfBirth("day", "22");
-        signUpPage.selectDateOfBirth("month", "November");
-        signUpPage.selectDateOfBirth("year", "1990");
-        signUpPage.selectAllRegistrationCheckboxes();
         signUpPage.setUserInformation(userData);
         signUpPage.scrollIntoView(signUpPage.createAccountButton);
+
         AccountCreatedPage accountCreatedPage = signUpPage.clickOnCreateAccountButton();
         Assert.assertTrue(accountCreatedPage.isAccountCreatedHeaderVisible());
 
