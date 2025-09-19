@@ -17,20 +17,6 @@ It's built on the **Page Object Model (POM)** architecture to ensure high mainta
 * `src/main/java/data`: Contains Data Objects (POJOs) (e.g., `UserInformation.java`). These models cleanly pass structured test data to the Page Objects.
 * `src/test/java/tests`: Contains the TestNG test classes. These define the high-level test logic and assertions.
 * `pom.xml`: Defines all project dependencies and build settings.
-
-## ⚙️ Test Automation Concepts Demonstrated
-This framework implements several key concepts for building stable and professional test suites:
-
-### Data Management & Design
-* **Data Objects (POJOs)**: Utilized custom classes (e.g., UserInformation) to separate test data from test logic. This makes test methods clean and readable.
-
-### Stability & Robustness
-* **Explicit Waits** (`WebDriverWait`): Used to prevent flaky tests by ensuring elements are present, visible, or clickable before interaction.
-* **Advanced Element Handling**: `JavascriptExecutor` is implemented to run scripts (like scrolling an element into view) to bypass common `ElementClickInterceptedException` errors and handle elements initially outside the viewport.
-
-### Flow Control & Isolation
-* **Setup Assertions** (@`BeforeMethod`): The critical "Verify home page is visible" prerequisite is executed and asserted within a `@BeforeMethod` setup. If this setup fails, subsequent tests are automatically **skipped** (not failed), ensuring test isolation and preventing cascading failures.
-
 ## ⚙️ Test Automation Concepts Demonstrated
 The framework showcases stability and professional design through the following techniques:
 
