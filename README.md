@@ -55,6 +55,7 @@ You have a few options for running the tests:
 ## 📋 Implemented Test Cases
 ### ✅ Test Case 1: Register User
 - **Goal**: Verify the full user lifecycle: successful account creation, confirmed login status, and subsequent account deletion with final confirmation.
+- **Concepts**: Multi-page navigation, form filling (using data providers), handling radio buttons/dropdowns, text validation for successful login, and final confirmation of account deletion.
 
 **Flow**:
 1. **Account Creation**: Navigate to sign-up, fill out all user and address details (using the `UserInformation` data object).
@@ -62,15 +63,3 @@ You have a few options for running the tests:
 3. **Account Deletion**: Delete the newly created account.
 4. **Confirmation**: Verify that the account deletion message is displayed.
 
-**Detailed Verification (Assertions)**:
-
-The test relies on a comprehensive set of assertions at key points in the flow:
-
-* Verify that the **Home Page is visible** successfully (by asserting the **URL**, **page title**, and if the **carousel** is displayed).
-* Verify '**New User Signup!**' text is visible.
-* Verify that '**ENTER ACCOUNT INFORMATION**' title is visible.
-* Verify that '**ACCOUNT CREATED!**' message is visible.
-* Verify that '**Logged in as `[username]`**' is visible in the header.
-* Verify that '**ACCOUNT DELETED!**' message is visible.
-
-**Status: Completed and stable.**
