@@ -13,7 +13,7 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testUserRegistration() {
-        LoginPage loginPage = homePage.login();
+        LoginPage loginPage = homePage.clickOnLoginButton();
 
         Assert.assertTrue(loginPage.isSignUpTextVisible());
 
@@ -60,7 +60,7 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testCorrectUserLogin() {
-        LoginPage loginPage = homePage.login();
+        LoginPage loginPage = homePage.clickOnLoginButton();
         Assert.assertTrue(loginPage.isLoginTextVisible());
 
         loginPage.setLoginEmail("doe@testmail.com");
@@ -68,7 +68,7 @@ public class LoginTests extends BaseTests {
         loginPage.login();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
-        homePage.logout();
+        homePage.clickOnLogoutButton();
         Assert.assertFalse(homePage.isUserLoggedOut());
     }
 }

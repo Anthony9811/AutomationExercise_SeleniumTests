@@ -23,12 +23,12 @@ public class HomePage {
         driver.findElement(By.cssSelector("a[href='/" + buttonName.toLowerCase() + "']")).click();
     }
 
-    public LoginPage login() {
+    public LoginPage clickOnLoginButton() {
         clickButton("login");
         return new LoginPage(driver);
     }
 
-    public void logout() {
+    public void clickOnLogoutButton() {
         clickButton("logout");
     }
 
