@@ -54,8 +54,8 @@ public class LoginPage {
         return new SignUpPage(driver);
     }
 
-    public HomePage login() {
+    public void login() {
         driver.findElement(loginButton).click();
-        return new HomePage(driver);
+        new HomePage(driver);
     }
 }
