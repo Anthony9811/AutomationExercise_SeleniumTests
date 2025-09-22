@@ -63,3 +63,13 @@ You have a few options for running the tests:
 3. **Account Deletion**: Delete the newly created account.
 4. **Confirmation**: Verify that the account deletion message is displayed.
 
+### ✅ Test Case 2: User Login and Safe Logout
+- **Goal**: Validate a user's ability to successfully log in with correct credentials and then securely log out. The test verifies the visibility of the "Logged in as _username_" element after login and asserts its invisibility after clicking the logout button.
+- **Concepts**: Login form submission, successful assertion validation, graceful session termination (logout), and verifying element absence/invisibility.
+
+**Flow**:
+1. **Navigate & Login**: Navigate to the site, go to the Login page, and enter valid credentials.
+2. **Login Confirmation**: Verify the session is active (user is logged in).
+3. **Logout**: Click the 'Logout' button.
+4. **Session Termination**: Verify the user is successfully logged out.
+

@@ -13,14 +13,14 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testUserRegistration() {
-        LoginPage loginPage = homePage.clickLoginButton();
+        LoginPage loginPage = homePage.login();
 
         Assert.assertTrue(loginPage.isSignUpTextVisible());
 
         loginPage.setUsername("testname");
-        loginPage.setEmailField("tau@testmail.com");
+        loginPage.setSignupEmailField("tau@testmail.com");
 
-        SignUpPage signUpPage = loginPage.clickSignUpButton();
+        SignUpPage signUpPage = loginPage.signUp();
         Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
 
         signUpPage.selectMrTitle();
@@ -56,5 +56,19 @@ public class LoginTests extends BaseTests {
         DeleteAccountPage deleteAccountPage = homePage.clickOnDeleteAccount();
         Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
         deleteAccountPage.clickOnContinue();
+    }
+
+    @Test
+    public void testCorrectUserLogin() {
+        LoginPage loginPage = homePage.login();
+        Assert.assertTrue(loginPage.isLoginTextVisible());
+
+        loginPage.setLoginEmail("doe@testmail.com");
+        loginPage.setLoginPassword("password");
+        loginPage.login();
+        Assert.assertTrue(homePage.isUserLoggedIn());
+
+        homePage.logout();
+        Assert.assertFalse(homePage.isUserLoggedOut());
     }
 }

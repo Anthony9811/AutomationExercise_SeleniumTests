@@ -14,7 +14,6 @@ public class HomePage {
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
     private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
-
     public HomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -24,9 +23,21 @@ public class HomePage {
         driver.findElement(By.cssSelector("a[href='/" + buttonName.toLowerCase() + "']")).click();
     }
 
-    public LoginPage clickLoginButton() {
+    public LoginPage login() {
         clickButton("login");
         return new LoginPage(driver);
+    }
+
+    public void logout() {
+        clickButton("logout");
+    }
+
+    private Boolean isLoggedInAsLocatorDisplayed() {
+        try {
+            return driver.findElement(loggedInAsLocator).isDisplayed();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            return false;
+        }
     }
 
     public Boolean isTheCarouselDisplayed() {
@@ -35,12 +46,16 @@ public class HomePage {
 
     public Boolean isUserLoggedIn() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInAsLocator));
-        return driver.findElement(loggedInAsLocator).isDisplayed();
+        return isLoggedInAsLocatorDisplayed();
+    }
+
+    public Boolean isUserLoggedOut() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loggedInAsLocator));
+        return isLoggedInAsLocatorDisplayed();
     }
 
     public DeleteAccountPage  clickOnDeleteAccount() {
         driver.findElement(deleteAccountButton).click();
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(deleteAccountButton));
         return new DeleteAccountPage(driver);
     }
 }
