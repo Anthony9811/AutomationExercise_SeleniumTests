@@ -18,6 +18,7 @@ public class LoginPage {
     private By signUpButton = By.xpath("//button[normalize-space()='Signup']");
     private By passwordField = By.cssSelector("input[data-qa='login-password']");
     private By loginButton = By.cssSelector("button[data-qa='login-button']");
+    private By loginErrorMessage = By.xpath("//*[@id=\"form\"]/div/div/div[1]/div/form/p");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -57,5 +58,10 @@ public class LoginPage {
     public void login() {
         driver.findElement(loginButton).click();
         new HomePage(driver);
+    }
+
+    public String getErrorMessage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loginErrorMessage));
+        return driver.findElement(loginErrorMessage).getText();
     }
 }

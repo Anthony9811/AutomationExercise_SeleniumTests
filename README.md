@@ -73,3 +73,12 @@ You have a few options for running the tests:
 3. **Logout**: Click the 'Logout' button.
 4. **Session Termination**: Verify the user is successfully logged out.
 
+### ✅ Test Case 3: Negative Login Test
+- **Goal**: Validate that the application correctly handles login attempts with incorrect email and password combinations. The test asserts that the specific error message, "**Your email or password is incorrect!**", is visible after the login button is clicked.
+- **Concepts**: Negative testing, form submission validation, and accurate text assertion for error messages.
+
+**Flow**:
+1. **Navigate & Login**: Navigate to the site, go to the Login page.
+2. **Input Invalid Data**: Enter a non-existent or incorrect email address and/or password.
+3. **Attempt Login**: Click the 'Login' button.
+4. **Error Verification**: Assert that the expected login error message is displayed.

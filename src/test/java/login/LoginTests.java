@@ -10,10 +10,11 @@ import pages.LoginPage;
 import pages.SignUpPage;
 
 public class LoginTests extends BaseTests {
+    LoginPage loginPage;
 
     @Test
     public void testUserRegistration() {
-        LoginPage loginPage = homePage.clickOnLoginButton();
+        loginPage = homePage.clickOnLoginButton();
 
         Assert.assertTrue(loginPage.isSignUpTextVisible());
 
@@ -60,7 +61,7 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testCorrectUserLogin() {
-        LoginPage loginPage = homePage.clickOnLoginButton();
+        loginPage = homePage.clickOnLoginButton();
         Assert.assertTrue(loginPage.isLoginTextVisible());
 
         loginPage.setLoginEmail("doe@testmail.com");
@@ -70,5 +71,20 @@ public class LoginTests extends BaseTests {
 
         homePage.clickOnLogoutButton();
         Assert.assertFalse(homePage.isUserLoggedOut());
+    }
+
+    @Test
+    public void testIncorrectUserLogin() {
+        loginPage = homePage.clickOnLoginButton();
+        Assert.assertTrue(loginPage.isLoginTextVisible());
+
+        loginPage.setLoginEmail("joe@email.com");
+        loginPage.setLoginPassword("password123");
+        loginPage.login();
+
+        String expectedErrorMessage = "Your email or password is incorrect!";
+        Assert.assertEquals(loginPage.getErrorMessage(),
+                            expectedErrorMessage,
+                            "Error message is incorrect");
     }
 }
