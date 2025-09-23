@@ -19,11 +19,16 @@ public class LoginPage {
     private By passwordField = By.cssSelector("input[data-qa='login-password']");
     private By loginButton = By.cssSelector("button[data-qa='login-button']");
     private By loginErrorMessage = By.xpath("//*[@id=\"form\"]/div/div/div[1]/div/form/p");
+    private By signupErrorMessage = By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/p");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe("https://www.automationexercise.com/login"));
+    }
+
+    private void waitForElementToBeVisible(By element) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public Boolean isSignUpTextVisible() {
@@ -38,7 +43,7 @@ public class LoginPage {
         driver.findElement(nameField).sendKeys(username);
     }
 
-    public void setSignupEmailField(String email) {
+    public void setSignupEmail(String email) {
         driver.findElement(signupEmailField).sendKeys(email);
     }
 
@@ -60,8 +65,15 @@ public class LoginPage {
         new HomePage(driver);
     }
 
-    public String getErrorMessage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loginErrorMessage));
+    public String getLoginErrorMessage() {
+        waitForElementToBeVisible(loginErrorMessage);
         return driver.findElement(loginErrorMessage).getText();
     }
+
+    public String getSignUpErrorMessage() {
+        waitForElementToBeVisible(signupErrorMessage);
+        return driver.findElement(signupErrorMessage).getText();
+    }
+
+
 }

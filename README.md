@@ -63,7 +63,7 @@ You have a few options for running the tests:
 3. **Account Deletion**: Delete the newly created account.
 4. **Confirmation**: Verify that the account deletion message is displayed.
 
-### ✅ Test Case 2: User Login and Safe Logout
+### ✅ Test Cases 2 & 4: User Login and Safe Logout
 - **Goal**: Validate a user's ability to successfully log in with correct credentials and then securely log out. The test verifies the visibility of the "Logged in as _username_" element after login and asserts its invisibility after clicking the logout button.
 - **Concepts**: Login form submission, successful assertion validation, graceful session termination (logout), and verifying element absence/invisibility.
 
@@ -82,3 +82,14 @@ You have a few options for running the tests:
 2. **Input Invalid Data**: Enter a non-existent or incorrect email address and/or password.
 3. **Attempt Login**: Click the 'Login' button.
 4. **Error Verification**: Assert that the expected login error message is displayed.
+
+### ✅ Test Case 5: Existing Email Registration
+- **Goal**: Verify that a new user account cannot be created using an email address that is already registered in the system, and that an appropriate error message is displayed to the user.
+- **Concepts**: Validate the negative user registration scenario by attempting to sign up with an email address that is already registered in the system. The test asserts that the correct error message "Email Address already exist!" is displayed.
+
+**Flow**:
+1. **Navigate & Signup**: Go to the home page, click on 'Signup / Login', and verify that 'New User Signup!' is visible.
+2. **Input Existing Data**: Enter a name and an email address that is already registered with an existing account.
+3. **Attempt Signup**: Click the 'Signup' button.
+4. **Error Verification**: Assert that the expected error message is displayed on the page.
+

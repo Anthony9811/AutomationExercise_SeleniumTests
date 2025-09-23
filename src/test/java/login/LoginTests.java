@@ -19,7 +19,7 @@ public class LoginTests extends BaseTests {
         Assert.assertTrue(loginPage.isSignUpTextVisible());
 
         loginPage.setUsername("testname");
-        loginPage.setSignupEmailField("tau@testmail.com");
+        loginPage.setSignupEmail("tau@testmail.com");
 
         SignUpPage signUpPage = loginPage.signUp();
         Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
@@ -82,9 +82,24 @@ public class LoginTests extends BaseTests {
         loginPage.setLoginPassword("password123");
         loginPage.login();
 
-        String expectedErrorMessage = "Your email or password is incorrect!";
-        Assert.assertEquals(loginPage.getErrorMessage(),
-                            expectedErrorMessage,
+        String expectedError = "Your email or password is incorrect!";
+        Assert.assertEquals(loginPage.getLoginErrorMessage(),
+                            expectedError,
                             "Error message is incorrect");
+    }
+
+    @Test
+    public void testExistingEmailRegistration() {
+        loginPage = homePage.clickOnLoginButton();
+        Assert.assertTrue(loginPage.isSignUpTextVisible());
+
+        loginPage.setUsername("Testname");
+        loginPage.setSignupEmail("doe@testmail.com");
+        loginPage.signUp();
+
+        String expectedError = "Email Address already exist!";
+        Assert.assertEquals(loginPage.getSignUpErrorMessage(),
+                expectedError,
+                "Error message is incorrect");
     }
 }
