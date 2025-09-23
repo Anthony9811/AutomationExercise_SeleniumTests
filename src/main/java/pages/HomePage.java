@@ -32,6 +32,11 @@ public class HomePage {
         clickButton("logout");
     }
 
+    public ContactUsPage clickOnContactUs() {
+        clickButton("contact_us");
+        return new ContactUsPage(driver);
+    }
+
     private Boolean isLoggedInAsLocatorDisplayed() {
         try {
             return driver.findElement(loggedInAsLocator).isDisplayed();

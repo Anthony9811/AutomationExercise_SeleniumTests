@@ -93,3 +93,12 @@ You have a few options for running the tests:
 3. **Attempt Signup**: Click the 'Signup' button.
 4. **Error Verification**: Assert that the expected error message is displayed on the page.
 
+### ✅ Test Case 6: Contact Us Form Submission
+- **Goal**: Validate the entire "Contact Us" form workflow, from filling out the form and uploading a file to verifying the success message and navigating back to the home page.
+- Concepts: Form filling, file upload, interacting with JavaScript alerts, text validation for success messages, and navigating between pages.
+
+**Flow**:
+1. **Navigate**: Navigate to the 'Contact Us' page from the home page.
+2. **Form Submission**: Fill out all required fields (name, email, subject, message) and attach a file.
+3. **Confirmation**: Click 'Submit', confirm the alert, and verify the success message is displayed.
+4. **Final Navigation**: Click the 'Home' button and assert that the user is correctly returned to the home page.
