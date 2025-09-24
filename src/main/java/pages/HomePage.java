@@ -45,21 +45,25 @@ public class HomePage {
         }
     }
 
+    private void waitForLoggedInIndicator() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInAsLocator));
+    }
+
     public Boolean isTheCarouselDisplayed() {
         return driver.findElement(carousel).isDisplayed();
     }
 
     public Boolean isUserLoggedIn() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInAsLocator));
+        waitForLoggedInIndicator();
         return isLoggedInAsLocatorDisplayed();
     }
 
     public Boolean isUserLoggedOut() {
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(loggedInAsLocator));
+        waitForLoggedInIndicator();
         return isLoggedInAsLocatorDisplayed();
     }
 
-    public DeleteAccountPage  clickOnDeleteAccount() {
+    public DeleteAccountPage clickOnDeleteAccount() {
         driver.findElement(deleteAccountButton).click();
         return new DeleteAccountPage(driver);
     }
