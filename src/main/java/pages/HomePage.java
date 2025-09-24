@@ -37,6 +37,11 @@ public class HomePage {
         return new ContactUsPage(driver);
     }
 
+    public TestCasesPage clickOnTestCases() {
+        clickButton("test_cases");
+        return new TestCasesPage(driver);
+    }
+
     private Boolean isLoggedInAsLocatorDisplayed() {
         try {
             return driver.findElement(loggedInAsLocator).isDisplayed();

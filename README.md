@@ -102,3 +102,12 @@ You have a few options for running the tests:
 2. **Form Submission**: Fill out all required fields (name, email, subject, message) and attach a file.
 3. **Confirmation**: Click 'Submit', confirm the alert, and verify the success message is displayed.
 4. **Final Navigation**: Click the 'Home' button and assert that the user is correctly returned to the home page.
+
+### ✅ Test Case 7: Verify Test Cases Page
+- **Goal**: Validate that clicking the "Test Cases" button on the homepage correctly redirects the user to the dedicated test cases page.
+- **Concepts**: Page navigation, URL validation, and verifying page url on the destination page to confirm successful navigation.
+
+**Flow**:
+1. **Navigate**: Navigate to the site's home page.
+2. **Click**: Click on the 'Test Cases' button in the navigation bar.
+3. **Verification**: Assert that the user has successfully landed on the Test Cases page.
