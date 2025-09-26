@@ -11,7 +11,7 @@ public class SignUpPage {
     private WebDriver driver;
     private By accountInformationTitle = By.xpath("//div[@class = 'login-form']//h2[1]");
     private By passwordField = By.cssSelector("input[data-qa='password']");
-    private By firstNameField = By.cssSelector("input[data-qa='first_name']");
+    public  By firstNameField = By.cssSelector("input[data-qa='first_name']");
     private By lastNameField = By.cssSelector("input[data-qa='last_name']");
     private By companyField = By.cssSelector("input[data-qa='company']");
     private By addressField = By.cssSelector("input[data-qa='address']");

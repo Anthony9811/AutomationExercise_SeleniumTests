@@ -32,6 +32,7 @@ public class LoginTests extends BaseTests {
         signUpPage.selectDateOfBirth("month", "November");
         signUpPage.selectDateOfBirth("year", "1990");
 
+        signUpPage.scrollIntoView(signUpPage.firstNameField);
         signUpPage.selectAllRegistrationCheckboxes();
 
         UserInformation userData = new UserInformation(
