@@ -42,6 +42,11 @@ public class HomePage {
         return new TestCasesPage(driver);
     }
 
+    public ProductsPage clickOnProducts() {
+        clickButton("products");
+        return new ProductsPage(driver);
+    }
+
     private Boolean isLoggedInAsLocatorDisplayed() {
         try {
             return driver.findElement(loggedInAsLocator).isDisplayed();

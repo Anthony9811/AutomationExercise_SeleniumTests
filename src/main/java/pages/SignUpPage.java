@@ -71,11 +71,11 @@ public class SignUpPage {
         WebElement newsletter = driver.findElement(newsletterCheckBox);
         WebElement specialOffers = driver.findElement(specialOffersCheckBox);
 
-        if (!newsletter.isSelected()){
+        if (!newsletter.isSelected()) {
             newsletter.click();
         }
 
-        if (!specialOffers.isSelected()){
+        if (!specialOffers.isSelected()) {
             specialOffers.click();
         }
     }
@@ -97,10 +97,6 @@ public class SignUpPage {
 
     public AccountCreatedPage clickOnCreateAccountButton() {
         driver.findElement(createAccountButton).click();
-//        WebElement createButton = driver.findElement(createAccountButton);
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(createButton).click().build().perform();
-//        createButton.click();
         return new AccountCreatedPage(driver);
     }
 }

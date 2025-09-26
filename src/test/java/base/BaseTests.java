@@ -17,7 +17,6 @@ public class BaseTests {
     @BeforeClass
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-
         options.addArguments("--disable-features=PasswordManager");//disables password manager
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false); // Prevents Chrome from offering to save passwords
