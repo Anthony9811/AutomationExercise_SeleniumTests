@@ -32,7 +32,6 @@ public class LoginTests extends BaseTests {
         signUpPage.selectDateOfBirth("month", "November");
         signUpPage.selectDateOfBirth("year", "1990");
 
-        signUpPage.scrollIntoView(signUpPage.firstNameField);
         signUpPage.selectAllRegistrationCheckboxes();
 
         UserInformation userData = new UserInformation(
@@ -47,7 +46,6 @@ public class LoginTests extends BaseTests {
                 "12345678"
         );
         signUpPage.setUserInformation(userData);
-        signUpPage.scrollIntoView(signUpPage.createAccountButton);
 
         AccountCreatedPage accountCreatedPage = signUpPage.clickOnCreateAccountButton();
         Assert.assertTrue(accountCreatedPage.isAccountCreatedHeaderVisible());

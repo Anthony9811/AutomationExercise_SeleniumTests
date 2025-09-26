@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 public class SignUpPage extends BasePage{
     private By accountInformationTitle = By.xpath("//div[@class = 'login-form']//h2[1]");
     private By passwordField = By.cssSelector("input[data-qa='password']");
-    public  By firstNameField = By.cssSelector("input[data-qa='first_name']");
+    private  By firstNameField = By.cssSelector("input[data-qa='first_name']");
     private By lastNameField = By.cssSelector("input[data-qa='last_name']");
     private By companyField = By.cssSelector("input[data-qa='company']");
     private By addressField = By.cssSelector("input[data-qa='address']");
@@ -19,7 +19,7 @@ public class SignUpPage extends BasePage{
     private By cityField = By.cssSelector("input[data-qa='city']");
     private By zipCodeField = By.cssSelector("input[data-qa='zipcode']");
     private By mobileNumberField = By.cssSelector("input[data-qa='mobile_number']");
-    public  By createAccountButton = By.cssSelector("button[data-qa='create-account']");
+    private  By createAccountButton = By.cssSelector("button[data-qa='create-account']");
     private By newsletterCheckBox = By.id("newsletter");
     private By specialOffersCheckBox = By.id("optin");
 
@@ -48,14 +48,6 @@ public class SignUpPage extends BasePage{
         typeText(passwordField, password);
     }
 
-    public void scrollIntoView(By element){
-        String script = "arguments[0].scrollIntoView(true);";
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-        while (!driver.findElement(element).isDisplayed()) {
-            javascriptExecutor.executeScript(script);
-        }
-    }
-
     public void selectDateOfBirth(String dropdownName, String valueToSelect) {
         By dropdownLocator = switch (dropdownName.toLowerCase()) {
             case "day" -> By.cssSelector("select[data-qa='days']");
@@ -71,6 +63,7 @@ public class SignUpPage extends BasePage{
     }
 
     public void selectAllRegistrationCheckboxes() {
+        scrollElementIntoView(firstNameField);
         WebElement newsletter = driver.findElement(newsletterCheckBox);
         WebElement specialOffers = driver.findElement(specialOffersCheckBox);
 
@@ -99,6 +92,7 @@ public class SignUpPage extends BasePage{
     }
 
     public AccountCreatedPage clickOnCreateAccountButton() {
+        scrollElementIntoView(createAccountButton);
         clickElement(createAccountButton);
         return new AccountCreatedPage(driver);
     }

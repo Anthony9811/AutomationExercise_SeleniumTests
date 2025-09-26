@@ -1,7 +1,9 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -38,5 +40,19 @@ public class BasePage {
 
     public void waitForUrlToBe(String link) {
         wait.until(ExpectedConditions.urlToBe(link));
+    }
+
+    public void scrollElementIntoView (By element) {
+        String script = "arguments[0].scrollIntoView(true);";
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        while (!isElementDisplayed(element)) {
+            javascriptExecutor.executeScript(script);
+        }
+    }
+
+    public void clickWithJS(WebElement element) {
+        String script = "arguments[0].click();";
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(script, element);
     }
 }
