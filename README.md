@@ -95,7 +95,7 @@ You have a few options for running the tests:
 
 ### ✅ Test Case 6: Contact Us Form Submission
 - **Goal**: Validate the entire "Contact Us" form workflow, from filling out the form and uploading a file to verifying the success message and navigating back to the home page.
-- Concepts: Form filling, file upload, interacting with JavaScript alerts, text validation for success messages, and navigating between pages.
+- **Concepts**: Form filling, file upload, interacting with JavaScript alerts, text validation for success messages, and navigating between pages.
 
 **Flow**:
 1. **Navigate**: Navigate to the 'Contact Us' page from the home page.
@@ -111,3 +111,18 @@ You have a few options for running the tests:
 1. **Navigate**: Navigate to the site's home page.
 2. **Click**: Click on the 'Test Cases' button in the navigation bar.
 3. **Verification**: Assert that the user has successfully landed on the Test Cases page.
+
+### ✅ Test Case 8: Product Browsing and Detail Verification
+- **Goal**: Verify that the 'Products' page loads correctly, displays a visible list of all items, and confirms that clicking any product successfully navigates to a details page showing all required product specifications.
+- **Concepts**: Page navigation, element list handling, multi-field data validation, dynamic interaction with elements through the `JavascriptExecutor` class.
+
+**Flow**:
+1. **Navigate**: Navigate to the site and click the 'Products' button.
+2. **Product List**: Verify that the "ALL PRODUCTS" page is visible and that the product list itself is displayed.
+3. **Detail View**: Click the 'View Product' button for the first product.
+4. **Verification**: Assert that the resulting product detail page displays all necessary information (product name, category, price, availability, condition, brand).
+
+#### ⚠️Special Note on Element Interaction (Click Interception):
+The standard Selenium `click()` method for the 'View Product' button often fails with an `ElementClickInterceptedException`. This is due to dynamic advertisements or overlays on the page obscuring the button's click area.
+
+* **Solution**: This test case uses `JavascriptExecutor` to execute a direct click script on the 'View Product' button, bypassing the interfering ad layer and ensuring reliable execution.
