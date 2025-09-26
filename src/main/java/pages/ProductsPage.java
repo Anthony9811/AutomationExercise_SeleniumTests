@@ -6,10 +6,28 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Objects;
 
-public class ProductsPage extends BasePage{
+public class ProductsPage extends BasePage {
+    private By searchInputField = By.id("search_product");
+    private By searchButton = By.id("submit_search");
+    private By searchedProductsTitle = By.xpath("//h2[normalize-space()='Searched Products']");
+    private By foundProductName = By.cssSelector("div[class='single-products'] p");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+    }
+
+    public void searchProduct(String productName) {
+        typeText(searchInputField, productName);
+        clickElement(searchButton);
+    }
+
+    public Boolean isSearchedProductsHeaderVisible() {
+        waitForElementToBeVisible(searchedProductsTitle);
+        return isElementDisplayed(searchedProductsTitle);
+    }
+
+    public String getFoundProductName() {
+        return getElementText(foundProductName);
     }
 
     public Boolean isUserOnProductsPage() {

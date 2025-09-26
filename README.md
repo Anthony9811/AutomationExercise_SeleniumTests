@@ -126,3 +126,11 @@ You have a few options for running the tests:
 The standard Selenium `click()` method for the 'View Product' button often fails with an `ElementClickInterceptedException`. This is due to dynamic advertisements or overlays on the page obscuring the button's click area.
 
 * **Solution**: This test case uses `JavascriptExecutor` to execute a direct click script on the 'View Product' button, bypassing the interfering ad layer and ensuring reliable execution.
+
+### ✅ Test Case 9: Product Search and Verification
+**Goal**: Verify that the product search functionality works correctly by entering a keyword, confirming the search results page is displayed, and ensuring all visible products match the search criteria.
+**Concepts**: Search form submission, asserting text visibility, and validating a list of elements (the search results) to confirm their content matches the search criteria.
+**Flow**:
+1. **Navigate**: Navigate to the site and then click on the 'Products' button.
+2. **Search Action**: Enter a product name or keyword into the search input field and click the search button.
+3. **Verification**: Assert that the 'SEARCHED PRODUCTS' section appears and that every product displayed on the results page is relevant to the search term.
