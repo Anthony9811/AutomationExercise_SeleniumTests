@@ -2,14 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class LoginPage extends BasePage {
     private By signUpText = By.xpath("//h2[normalize-space()='New User Signup!']");
     private By loginText = By.xpath("//h2[normalize-space()='Login to your account']");
     private By nameField = By.name("name");
@@ -22,57 +16,52 @@ public class LoginPage {
     private By signupErrorMessage = By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/p");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.urlToBe("https://www.automationexercise.com/login"));
-    }
-
-    private void waitForElementToBeVisible(By element) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        super(driver);
+        waitForUrlToBe("https://www.automationexercise.com/login");
     }
 
     public Boolean isSignUpTextVisible() {
-        return driver.findElement(signUpText).isDisplayed();
+        return isElementDisplayed(signUpText);
     }
 
     public Boolean isLoginTextVisible() {
-        return driver.findElement(loginText).isDisplayed();
+        return isElementDisplayed(loginText);
     }
 
     public  void setUsername(String username) {
-        driver.findElement(nameField).sendKeys(username);
+        typeText(nameField, username);
     }
 
     public void setSignupEmail(String email) {
-        driver.findElement(signupEmailField).sendKeys(email);
+        typeText(signupEmailField, email);
     }
 
     public void setLoginEmail(String email) {
-        driver.findElement(loginEmailField).sendKeys(email);
+        typeText(loginEmailField, email);
     }
 
     public void setLoginPassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+        typeText(passwordField, password);
     }
 
     public SignUpPage signUp() {
-        driver.findElement(signUpButton).click();
+        clickElement(signUpButton);
         return new SignUpPage(driver);
     }
 
     public void login() {
-        driver.findElement(loginButton).click();
+        clickElement(loginButton);
         new HomePage(driver);
     }
 
     public String getLoginErrorMessage() {
         waitForElementToBeVisible(loginErrorMessage);
-        return driver.findElement(loginErrorMessage).getText();
+        return getElementText(loginErrorMessage);
     }
 
     public String getSignUpErrorMessage() {
         waitForElementToBeVisible(signupErrorMessage);
-        return driver.findElement(signupErrorMessage).getText();
+        return getElementText(signupErrorMessage);
     }
 
 

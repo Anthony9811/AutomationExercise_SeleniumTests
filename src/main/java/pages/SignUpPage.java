@@ -7,8 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class SignUpPage {
-    private WebDriver driver;
+public class SignUpPage extends BasePage{
     private By accountInformationTitle = By.xpath("//div[@class = 'login-form']//h2[1]");
     private By passwordField = By.cssSelector("input[data-qa='password']");
     public  By firstNameField = By.cssSelector("input[data-qa='first_name']");
@@ -26,23 +25,27 @@ public class SignUpPage {
 
 
     public SignUpPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public Boolean isAccountInformationHeaderVisible() {
-        return driver.findElement(accountInformationTitle).isDisplayed();
+        return isElementDisplayed(accountInformationTitle);
     }
 
     public void selectMrTitle() {
-        driver.findElement(By.id("id_gender1")).click();
+        By mrTitle = By.id("id_gender1");
+        waitForElementToBeVisible(mrTitle);
+        clickElement(mrTitle);
     }
 
     public void selectMrsTitle() {
-        driver.findElement(By.id("id_gender2")).click();
+        By mrsTitle = By.id("id_gender2");
+        waitForElementToBeVisible(mrsTitle);
+        clickElement(By.id("id_gender2"));
     }
 
     public void setPassword(String password) {
-        driver.findElement(passwordField).sendKeys(password);
+        typeText(passwordField, password);
     }
 
     public void scrollIntoView(By element){
@@ -81,22 +84,22 @@ public class SignUpPage {
     }
 
     public void setUserInformation(UserInformation user) {
-        driver.findElement(firstNameField).sendKeys(user.firstName);
-        driver.findElement(lastNameField).sendKeys(user.lastName);
-        driver.findElement(companyField).sendKeys(user.company);
-        driver.findElement(addressField).sendKeys(user.address);
+        typeText(firstNameField, user.firstName);
+        typeText(lastNameField, user.lastName);
+        typeText(companyField, user.company);
+        typeText(addressField, user.address);
 
         Select select = new Select(driver.findElement(countriesDropdown));
         select.selectByContainsVisibleText(user.country);
 
-        driver.findElement(stateField).sendKeys(user.state);
-        driver.findElement(cityField).sendKeys(user.city);
-        driver.findElement(zipCodeField).sendKeys(user.zipCode);
-        driver.findElement(mobileNumberField).sendKeys(user.mobileNumber);
+        typeText(stateField, user.state);
+        typeText(cityField, user.city);
+        typeText(zipCodeField, user.zipCode);
+        typeText(mobileNumberField, user.mobileNumber);
     }
 
     public AccountCreatedPage clickOnCreateAccountButton() {
-        driver.findElement(createAccountButton).click();
+        clickElement(createAccountButton);
         return new AccountCreatedPage(driver);
     }
 }

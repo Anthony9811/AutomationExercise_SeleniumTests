@@ -2,16 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.Objects;
 
-public class ContactUsPage {
-    WebDriver driver;
-    WebDriverWait wait;
+public class ContactUsPage extends BasePage{
     private By contactFormHeader = By.cssSelector("div[class='contact-form'] h2[class='title text-center']");
     private By nameField = By.cssSelector("input[data-qa='name']");
     private By emailField = By.cssSelector("input[data-qa='email']");
@@ -23,36 +18,31 @@ public class ContactUsPage {
     private By homeButton = By.xpath("//a[@class='btn btn-success']");
 
     public ContactUsPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
-    private void fillField(By elementLocator, String text) {
-        driver.findElement(elementLocator).sendKeys(text);
+        super(driver);
     }
 
     public Boolean isFormHeaderVisible() {
-        return driver.findElement(contactFormHeader).isDisplayed();
+        return isElementDisplayed(contactFormHeader);
     }
 
     public void setName(String name) {
-        fillField(nameField, name);
+        typeText(nameField, name);
     }
 
     public void setEmail(String email) {
-        fillField(emailField, email);
+        typeText(emailField, email);
     }
 
     public void setSubject(String subject) {
-        fillField(subjectField, subject);
+        typeText(subjectField, subject);
     }
 
     public  void setMessage(String message) {
-        fillField(messageField, message);
+        typeText(messageField, message);
     }
 
     public void clickSubmitButton() {
-        driver.findElement(submitButton).click();
+        clickElement(submitButton);
     }
 
     public void alert_clickToAccept() {
@@ -60,17 +50,17 @@ public class ContactUsPage {
     }
 
     public String getSubmitStatusMessage() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(submitStatus));
-        return driver.findElement(submitStatus).getText();
+        waitForElementToBeVisible(submitStatus);
+        return getElementText(submitStatus);
     }
 
     public void goToHome() {
-        driver.findElement(homeButton).click();
+        clickElement(homeButton);
     }
 
     public Boolean isHomePageInView() {
         String homePageLink = "https://www.automationexercise.com/";
-        wait.until(ExpectedConditions.urlToBe(homePageLink));
+        waitForUrlToBe(homePageLink);
         return Objects.equals(driver.getCurrentUrl(), homePageLink);
     }
 

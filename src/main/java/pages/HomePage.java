@@ -7,16 +7,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class HomePage extends BasePage{
     private By carousel = By.id("slider-carousel");
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
     private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     private void clickButton(String buttonName) {
@@ -49,32 +46,27 @@ public class HomePage {
 
     private Boolean isLoggedInAsLocatorDisplayed() {
         try {
-            return driver.findElement(loggedInAsLocator).isDisplayed();
+            return isElementDisplayed(loggedInAsLocator);
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
     }
 
-    private void waitForLoggedInIndicator() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loggedInAsLocator));
-    }
-
     public Boolean isTheCarouselDisplayed() {
-        return driver.findElement(carousel).isDisplayed();
+        return isElementDisplayed(carousel);
     }
 
     public Boolean isUserLoggedIn() {
-        waitForLoggedInIndicator();
+        waitForElementToBeVisible(loggedInAsLocator);
         return isLoggedInAsLocatorDisplayed();
     }
 
     public Boolean isUserLoggedOut() {
-        waitForLoggedInIndicator();
         return isLoggedInAsLocatorDisplayed();
     }
 
     public DeleteAccountPage clickOnDeleteAccount() {
-        driver.findElement(deleteAccountButton).click();
+        clickElement(deleteAccountButton);
         return new DeleteAccountPage(driver);
     }
 }
