@@ -135,3 +135,13 @@ The standard Selenium `click()` method for the 'View Product' button often fails
 1. **Navigate**: Navigate to the site and then click on the 'Products' button.
 2. **Search Action**: Enter a product name or keyword into the search input field and click the search button.
 3. **Verification**: Assert that the 'SEARCHED PRODUCTS' section appears and that every product displayed on the results page is relevant to the search term.
+
+### ✅ Test Case 10: Home Page Subscription Validation
+- **Goal**: Verify that a user can successfully subscribe to the newsletter from the home page footer and receive a confirmation message.
+- **Concepts**: Scrolling the page (using `JavascriptExecutor` class), interacting with footer elements, and asserting the final success message.
+
+**Flow**:
+1. Scroll: Navigate to the site and scroll down to the bottom of the page (the footer area).
+2. Verify UI: Assert that the 'SUBSCRIPTION' heading is visible.
+3. Subscribe: Enter an email address into the subscription input field and click the submit button (arrow icon).
+4. Verification: Assert that the success message is displayed, confirming the subscription was successful.

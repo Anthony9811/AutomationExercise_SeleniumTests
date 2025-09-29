@@ -12,6 +12,10 @@ import java.time.Duration;
 public class BasePage {
     WebDriver driver;
     WebDriverWait wait;
+    private By footer = By.cssSelector("div[class='single-widget'] h2");
+    private By successfulSubscriptionMessage = By.xpath("//div[@class='alert-success alert']");
+    private By subscriptionEmailAddress = By.id("susbscribe_email");
+    private By subscribeButton = By.id("subscribe");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -54,5 +58,30 @@ public class BasePage {
         String script = "arguments[0].click();";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(script, element);
+    }
+
+    public void scrollToFooter() {
+        scrollElementIntoView(footer);
+    }
+
+    public String getFooterTitle() {
+        return getElementText(footer);
+    }
+
+    /*
+    The following methods are for testing the footer, since there's two
+    test cases that ask for this I decided to take this approach instead
+    of repeating the code
+     */
+    public Boolean isSubscriptionSuccessMessageVisible() {
+        return isElementDisplayed(successfulSubscriptionMessage);
+    }
+
+    public void typeSubscriptionEmail(String email) {
+        typeText(subscriptionEmailAddress, email);
+    }
+
+    public void clickSubscribeButton() {
+        clickElement(subscribeButton);
     }
 }
