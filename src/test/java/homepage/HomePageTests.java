@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class HomePageTests extends BaseTests {
 
     @Test
-    public void testVerifySubscription() {
+    public void testVerifySubscriptionOnHomePage() {
         String expectedFooterTitle = "Subscription";
         homePage.scrollToFooter();
         Assert.assertEquals(homePage.getFooterTitle(),

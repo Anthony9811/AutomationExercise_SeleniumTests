@@ -2,10 +2,6 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class HomePage extends BasePage{
     private By carousel = By.id("slider-carousel");
@@ -42,6 +38,11 @@ public class HomePage extends BasePage{
     public ProductsPage clickOnProducts() {
         clickButton("products");
         return new ProductsPage(driver);
+    }
+
+    public CartPage clickOnCart() {
+        clickButton("view_cart");
+        return new CartPage(driver);
     }
 
     private Boolean isLoggedInAsLocatorDisplayed() {
