@@ -141,7 +141,22 @@ The standard Selenium `click()` method for the 'View Product' button often fails
 - **Concepts**: Scrolling the page (using `JavascriptExecutor` class), interacting with footer elements, and asserting the final success message.
 
 **Flow**:
-1. Scroll: Navigate to the site and scroll down to the bottom of the page (the footer area).
-2. Verify UI: Assert that the 'SUBSCRIPTION' heading is visible.
-3. Subscribe: Enter an email address into the subscription input field and click the submit button (arrow icon).
-4. Verification: Assert that the success message is displayed, confirming the subscription was successful.
+1. **Scroll**: Navigate to the site and scroll down to the bottom of the page (the footer area).
+2. **Verify UI**: Assert that the 'SUBSCRIPTION' heading is visible.
+3. **Subscribe**: Enter an email address into the subscription input field and click the submit button (arrow icon).
+4. **Verification**: Assert that the success message is displayed, confirming the subscription was successful.
+
+### ✅ Test Case 12: Add Products in Cart and Verify Details
+- **Goal**: Verify the core e-commerce functionality of the site: successfully adding multiple products to the shopping cart, and then accurately validating the product names, prices, quantities, and total calculations within the cart view.
+- **Concepts**: Concepts: Simulating mouse hover actions, handling multiple elements (`List<WebElement>`), and complex assertion of numeric and textual data.
+
+**Flow**:
+1. **Navigate & Add 1**: Navigate to the Products page, hover over the first product, and click 'Add to cart'. Click 'Continue Shopping'.
+2. **Add 2**: Hover over the second product and click 'Add to cart'.
+3. **View Cart**: Click the 'View Cart' button.
+4. **Verification**: Assert that both products are present and that their associated details (price, quantity, total) are correct.
+
+**Advanced Data Structure Implementation:**
+To facilitate clean and type-safe verification, the test case uses two key Data Object structures:
+1. `ExpectedProduct` (in `src/main/java/data`): A general-purpose POJO (_Plain Old Java Object_) created to store the expected price, quantity and total price of a product before it is added to the cart.
+2. `ActualProduct` (nested `record` class within `CartPage`): A Java Record defined inside the `CartPage` class. This is used to model the actual data scraped from a single row of the cart table, making it easy to compare against the `ExpectedProduct` data structure.

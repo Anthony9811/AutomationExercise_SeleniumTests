@@ -1,10 +1,15 @@
 package products;
 
 import base.BaseTests;
+import data.ExpectedProduct;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.CartPage;
 import pages.ProductDetailPage;
 import pages.ProductsPage;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ProductsTests extends BaseTests {
     ProductsPage productsPage;
@@ -37,5 +42,38 @@ public class ProductsTests extends BaseTests {
         Assert.assertEquals(productsPage.getFoundProductName(),
                             expectedProductName,
                             "The product was not found");
+    }
+
+    @Test
+    public void testAddProductsInCart() {
+        CartPage cartPage;
+        productsPage = homePage.clickOnProducts();
+        productsPage.hoverOverProduct(2);
+        productsPage.continueShopping();
+
+        productsPage.hoverOverProduct(3);
+        cartPage = productsPage.viewCart();
+
+        List<ExpectedProduct> expectedItems = Arrays.asList(
+                new ExpectedProduct("Rs. 500", 1, "Rs.500"),
+                new ExpectedProduct("Rs. 400", 1, "Rs.400")
+        );
+
+        List<CartPage.ActualProduct> actualItems = cartPage.getCartProducts();
+
+        Assert.assertEquals(actualItems.size(),
+                expectedItems.size(),
+                "The number of items on the cart does not match the amount selected");
+
+        for (int i = 0; i < expectedItems.size(); i++) {
+            ExpectedProduct expected = expectedItems.get(i);
+            CartPage.ActualProduct actual = actualItems.get(i);
+
+            Assert.assertEquals(actual.price(), expected.price, "Prices do not match");
+            Assert.assertEquals(actual.quantity(), expected.quantity, "Quantity does not match");
+            Assert.assertEquals(actual.totalPrice().replaceAll(" ", ""),
+                                expected.totalPrice,
+                                "Total price does not match");
+        }
     }
 }
