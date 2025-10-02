@@ -60,6 +60,11 @@ public class BasePage {
         js.executeScript(script, element);
     }
 
+    /*
+    The following methods are for testing the footer, since there's two
+    test cases that ask for this I decided to take this approach instead
+    of repeating the code
+     */
     public void scrollToFooter() {
         scrollElementIntoView(footer);
     }
@@ -68,11 +73,6 @@ public class BasePage {
         return getElementText(footer);
     }
 
-    /*
-    The following methods are for testing the footer, since there's two
-    test cases that ask for this I decided to take this approach instead
-    of repeating the code
-     */
     public Boolean isSubscriptionSuccessMessageVisible() {
         return isElementDisplayed(successfulSubscriptionMessage);
     }

@@ -48,10 +48,10 @@ public class ProductsTests extends BaseTests {
     public void testAddProductsInCart() {
         CartPage cartPage;
         productsPage = homePage.clickOnProducts();
-        productsPage.hoverOverProduct(2);
+        productsPage.addToCart(2);
         productsPage.continueShopping();
 
-        productsPage.hoverOverProduct(3);
+        productsPage.addToCart(3);
         cartPage = productsPage.viewCart();
 
         List<ExpectedProduct> expectedItems = Arrays.asList(

@@ -4,7 +4,7 @@ import components.ProductActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     private ProductActions productActions;
 
     private By carousel = By.id("slider-carousel");
@@ -27,6 +27,10 @@ public class HomePage extends BasePage{
 
     public void clickOnLogoutButton() {
         clickButton("logout");
+    }
+
+    public void addProductToCart(int productNumber) {
+        productActions.hoverOverProductAndAddToCart(productNumber);
     }
 
     public ContactUsPage clickOnContactUs() {
