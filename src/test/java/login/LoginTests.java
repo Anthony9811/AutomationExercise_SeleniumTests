@@ -1,6 +1,7 @@
 package login;
 
 import base.BaseTests;
+import data.UserDataProvider;
 import data.UserInformation;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -25,26 +26,13 @@ public class LoginTests extends BaseTests {
         Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
 
         signUpPage.selectMrTitle();
-
         signUpPage.setPassword("password");
-
         signUpPage.selectDateOfBirth("day", "22");
         signUpPage.selectDateOfBirth("month", "November");
         signUpPage.selectDateOfBirth("year", "1990");
-
         signUpPage.selectAllRegistrationCheckboxes();
 
-        UserInformation userData = new UserInformation(
-                "Mark",
-                "Calaway",
-                "Dead Man Inc",
-                "Death Valley, WWE",
-                "United States",
-                "Connecticut",
-                "Stamford",
-                "50301",
-                "12345678"
-        );
+        UserInformation userData = UserDataProvider.createValidUser();
         signUpPage.setUserInformation(userData);
 
         AccountCreatedPage accountCreatedPage = signUpPage.clickOnCreateAccountButton();
@@ -100,5 +88,10 @@ public class LoginTests extends BaseTests {
         Assert.assertEquals(loginPage.getSignUpErrorMessage(),
                 expectedError,
                 "Error message is incorrect");
+    }
+
+    @Test
+    public void testRegisterWhileCheckout() {
+
     }
 }
