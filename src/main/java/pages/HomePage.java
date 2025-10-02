@@ -1,15 +1,19 @@
 package pages;
 
+import components.ProductActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class HomePage extends BasePage{
+    private ProductActions productActions;
+
     private By carousel = By.id("slider-carousel");
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
     private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
     public HomePage(WebDriver driver) {
         super(driver);
+        this.productActions = new ProductActions(driver);
     }
 
     private void clickButton(String buttonName) {
@@ -38,6 +42,10 @@ public class HomePage extends BasePage{
     public ProductsPage clickOnProducts() {
         clickButton("products");
         return new ProductsPage(driver);
+    }
+
+    public ProductDetailPage viewProduct(int productNumber) {
+        return productActions.viewProduct(productNumber);
     }
 
     public CartPage clickOnCart() {

@@ -1,5 +1,6 @@
 package pages;
 
+import components.ProductActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.util.Objects;
 
 public class ProductsPage extends BasePage {
+    private ProductActions productActions;
+
     private By searchInputField = By.id("search_product");
     private By searchButton = By.id("submit_search");
     private By searchedProductsTitle = By.xpath("//h2[normalize-space()='Searched Products']");
@@ -17,6 +20,7 @@ public class ProductsPage extends BasePage {
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+        this.productActions = new ProductActions(driver);
     }
 
     public void searchProduct(String productName) {
@@ -30,9 +34,7 @@ public class ProductsPage extends BasePage {
     }
 
     public CartPage viewCart() {
-        waitForElementToBeVisible(viewCartButton);
-        clickElement(viewCartButton);
-        return new CartPage(driver);
+        return productActions.viewCart(viewCartButton);
     }
 
     public Boolean isSearchedProductsHeaderVisible() {
@@ -51,13 +53,7 @@ public class ProductsPage extends BasePage {
     }
 
     public ProductDetailPage viewProduct(int productNumber) {
-        By viewProductButtonLocator = By.cssSelector("a[href='/product_details/"+productNumber+"']");
-        WebElement viewProductButton = driver.findElement(viewProductButtonLocator);
-
-        scrollElementIntoView(viewProductButtonLocator);
-        waitForElementToBeVisible(viewProductButtonLocator);
-        clickWithJS(viewProductButton);
-        return new ProductDetailPage(driver);
+        return productActions.viewProduct(productNumber);
     }
 
     /**
