@@ -160,3 +160,21 @@ The standard Selenium `click()` method for the 'View Product' button often fails
 To facilitate clean and type-safe verification, the test case uses two key Data Object structures:
 1. `ExpectedProduct` (in `src/main/java/data`): A general-purpose POJO (_Plain Old Java Object_) created to store the expected price, quantity and total price of a product before it is added to the cart.
 2. `ActualProduct` (nested `record` class within `CartPage`): A Java Record defined inside the `CartPage` class. This is used to model the actual data scraped from a single row of the cart table, making it easy to compare against the `ExpectedProduct` data structure.
+
+### ✅ Test Case 13: Verify Product Quantity in Cart
+- **Goal**: Verify that a user can successfully change the quantity of a product on the detail page before adding it to the cart, and that the cart accurately reflects the updated quantity.
+- **Concepts**: Navigating to a product detail page, form input modification (changing quantity), and precise assertion of numeric values on the cart page.
+
+**Flow**:
+1. **Navigate**: Click 'View Product' for a product on the home page.
+2. **Detail View**: Verify the product detail page is opened.
+3. **Update Quantity**: Increase the product quantity (e.g., to 4).
+4. **Add to Cart**: Click 'Add to cart' and then 'View Cart'.
+5. **Verification**: Assert that the final quantity of the product displayed in the cart matches the updated value.
+
+#### Key Architectural Enhancement: `ProductActions` Component
+This test case introduces a new concept into the framework: the `ProductActions` component.
+
+**Purpose**: This component centralizes reusable UI interaction logic that is specific to product elements (like 'View Product' or 'Add to Cart') but might be shared across multiple page objects (like `HomePage` and `ProductsPage`).
+
+**Benefit**: This keeps the classes cleaner, adhering to the Single Responsibility Principle (SRP) by delegating product-specific actions to the new component.

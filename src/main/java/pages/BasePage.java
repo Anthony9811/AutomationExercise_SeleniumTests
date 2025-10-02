@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    WebDriver driver;
+    public WebDriver driver;
     WebDriverWait wait;
     private By footer = By.cssSelector("div[class='single-widget'] h2");
     private By successfulSubscriptionMessage = By.xpath("//div[@class='alert-success alert']");

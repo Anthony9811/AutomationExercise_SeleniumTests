@@ -1,28 +1,33 @@
 package pages;
 
+import components.ProductActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.Objects;
 
-public class ProductDetailPage {
-    WebDriver driver;
+public class ProductDetailPage extends BasePage{
+    private ProductActions productActions;
+
     private By productName = By.cssSelector("div[class='product-information'] h2");
     private By category = By.xpath("//div[@class='product-information']/p[1]");
     private By availability = By.xpath("//div[@class='product-information']/p[2]");
     private By condition = By.xpath("//div[@class='product-information']/p[3]");
     private By brand = By.xpath("//div[@class='product-information']/p[4]");
+    private By quantity = By.id("quantity");
+    private By addToCartButton = By.xpath("//button[normalize-space()='Add to cart']");
+    private By viewCartButton = By.cssSelector("a[href='/view_cart'");
 
     public ProductDetailPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        this.productActions = new ProductActions(driver);
     }
 
     public Boolean isUserViewingProductDetails() {
         return Objects.requireNonNull(driver.getCurrentUrl()).contains("product_details");
-    }
-
-    private String getElementText(By element) {
-        return driver.findElement(element).getText();
     }
 
     public String getProductName() {
@@ -43,5 +48,22 @@ public class ProductDetailPage {
 
     public String getBrand() {
         return getElementText(brand);
+    }
+
+    public void selectQuantity(String productQuantity) {
+        WebElement quantitySelector = driver.findElement(quantity);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(quantitySelector).click()
+                .keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL) //To select all text
+                .build().perform();
+        typeText(quantity, productQuantity);
+    }
+
+    public void addProductsToCart() {
+        clickElement(addToCartButton);
+    }
+
+    public CartPage viewCart() {
+        return productActions.viewCart(viewCartButton);
     }
 }

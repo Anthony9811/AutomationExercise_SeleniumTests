@@ -17,5 +17,5 @@ public class HomePageTests extends BaseTests {
         homePage.typeSubscriptionEmail("test@testmail.com");
         homePage.clickSubscribeButton();
         Assert.assertTrue(homePage.isSubscriptionSuccessMessageVisible());
-}
+    }
 }

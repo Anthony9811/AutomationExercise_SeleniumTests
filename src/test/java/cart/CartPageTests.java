@@ -4,12 +4,14 @@ import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
+import pages.ProductDetailPage;
 
 public class CartPageTests extends BaseTests {
+    CartPage cartPage;
 
     @Test
     public void testVerifySubscriptionOnCartPage() {
-        CartPage cartPage = homePage.clickOnCart();
+        cartPage = homePage.clickOnCart();
         String expectedFooterTitle = "Subscription";
         Assert.assertEquals(cartPage.getFooterTitle(),
                             expectedFooterTitle.toUpperCase(),
@@ -18,5 +20,19 @@ public class CartPageTests extends BaseTests {
         cartPage.typeSubscriptionEmail("test@testmail.com");
         cartPage.clickSubscribeButton();
         Assert.assertTrue(cartPage.isSubscriptionSuccessMessageVisible());
+    }
+
+    @Test
+    public void testVerifyProductQuantityInCart() {
+        ProductDetailPage productDetailPage = homePage.viewProduct(1);
+        Assert.assertTrue(productDetailPage.isUserViewingProductDetails());
+
+        productDetailPage.selectQuantity("4");
+        productDetailPage.addProductsToCart();
+        cartPage = productDetailPage.viewCart();
+
+        Assert.assertEquals(cartPage.getQuantity(),
+                           "4",
+                           "The quantity does not match with the expected amount");
     }
 }

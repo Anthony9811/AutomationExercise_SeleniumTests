@@ -35,4 +35,10 @@ public class CartPage extends BasePage {
         }
         return actualProducts;
     }
+
+    public String getQuantity() {
+        By quantity = By.cssSelector("tr[id='product-1'] button[class='disabled']");
+        waitForElementToBeVisible(quantity);
+        return getElementText(quantity);
+    }
 }
