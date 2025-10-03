@@ -63,6 +63,4 @@ public class LoginPage extends BasePage {
         waitForElementToBeVisible(signupErrorMessage);
         return getElementText(signupErrorMessage);
     }
-
-
 }

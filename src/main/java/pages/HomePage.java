@@ -10,6 +10,7 @@ public class HomePage extends BasePage {
     private By carousel = By.id("slider-carousel");
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
     private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
+    private By viewCartButon_OnAddedProduct = By.xpath("//p[@class='text-center']//a");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -29,6 +30,9 @@ public class HomePage extends BasePage {
         clickButton("logout");
     }
 
+    /**
+     * @param productNumber is 2-based due to the website's selectors order
+     */
     public void addProductToCart(int productNumber) {
         productActions.hoverOverProductAndAddToCart(productNumber);
     }
@@ -54,6 +58,12 @@ public class HomePage extends BasePage {
 
     public CartPage clickOnCart() {
         clickButton("view_cart");
+        return new CartPage(driver);
+    }
+
+    public CartPage viewCart_OnAddedProduct() {
+        waitForElementToBeVisible(viewCartButon_OnAddedProduct);
+        clickElement(viewCartButon_OnAddedProduct);
         return new CartPage(driver);
     }
 

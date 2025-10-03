@@ -39,13 +39,13 @@ public class ProductActions extends BasePage {
         By productLocator = By.xpath("(//div[@class='col-sm-4'])["+ productNumber +"]");
         By onHoverAddToCartButtonLocator = By.xpath(addButtonXPathExpression);
         WebElement product = driver.findElement(productLocator);
-        WebElement addToCartButton_OnHover = driver.findElement(onHoverAddToCartButtonLocator);
 
         Actions actions = new Actions(driver);
 
         scrollElementIntoView(productLocator);
         actions.moveToElement(product).perform();
         waitForElementToBeVisible(onHoverAddToCartButtonLocator);
+        WebElement addToCartButton_OnHover = driver.findElement(onHoverAddToCartButtonLocator);
         clickWithJS(addToCartButton_OnHover);
     }
 }

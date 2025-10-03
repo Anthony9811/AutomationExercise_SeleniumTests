@@ -1,17 +1,20 @@
 package login;
 
 import base.BaseTests;
+import data.PaymentData;
+import data.PaymentDataProvider;
 import data.UserDataProvider;
 import data.UserInformation;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AccountCreatedPage;
-import pages.DeleteAccountPage;
-import pages.LoginPage;
-import pages.SignUpPage;
+import pages.*;
 
 public class LoginTests extends BaseTests {
     LoginPage loginPage;
+    UserInformation userData;
+    SignUpPage signUpPage;
+    AccountCreatedPage accountCreatedPage;
+    DeleteAccountPage deleteAccountPage;
 
     @Test
     public void testUserRegistration() {
@@ -22,7 +25,7 @@ public class LoginTests extends BaseTests {
         loginPage.setUsername("testname");
         loginPage.setSignupEmail("tau@testmail.com");
 
-        SignUpPage signUpPage = loginPage.signUp();
+        signUpPage = loginPage.signUp();
         Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
 
         signUpPage.selectMrTitle();
@@ -32,16 +35,16 @@ public class LoginTests extends BaseTests {
         signUpPage.selectDateOfBirth("year", "1990");
         signUpPage.selectAllRegistrationCheckboxes();
 
-        UserInformation userData = UserDataProvider.createValidUser();
+        userData = UserDataProvider.createValidUser();
         signUpPage.setUserInformation(userData);
 
-        AccountCreatedPage accountCreatedPage = signUpPage.clickOnCreateAccountButton();
+        accountCreatedPage = signUpPage.clickOnCreateAccountButton();
         Assert.assertTrue(accountCreatedPage.isAccountCreatedHeaderVisible());
 
         homePage = accountCreatedPage.clickContinueButton();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
-        DeleteAccountPage deleteAccountPage = homePage.clickOnDeleteAccount();
+        deleteAccountPage = homePage.clickOnDeleteAccount();
         Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
         deleteAccountPage.clickOnContinue();
     }
@@ -92,6 +95,50 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testRegisterWhileCheckout() {
+        CartPage cartPage;
+        CheckoutPage checkoutPage;
+        PaymentPage paymentPage;
+        PaymentDonePage paymentDonePage;
+        PaymentData cardData = PaymentDataProvider.getTestCardInformation();
+        String cartUrl = "https://www.automationexercise.com/view_cart";
 
+        homePage.addProductToCart(2);
+        cartPage = homePage.viewCart_OnAddedProduct();
+        Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
+
+        cartPage.proceedToCheckout();
+        loginPage = cartPage.goToLogin();
+        loginPage.setUsername("testname");
+        loginPage.setSignupEmail("tau@testmail.com");
+        signUpPage = loginPage.signUp();
+
+        signUpPage.selectMrTitle();
+        signUpPage.setPassword("password");
+        signUpPage.selectDateOfBirth("day", "22");
+        signUpPage.selectDateOfBirth("month", "November");
+        signUpPage.selectDateOfBirth("year", "1990");
+        signUpPage.selectAllRegistrationCheckboxes();
+
+        userData = UserDataProvider.createValidUser();
+        signUpPage.setUserInformation(userData);
+        accountCreatedPage = signUpPage.clickOnCreateAccountButton();
+        Assert.assertTrue(accountCreatedPage.isAccountCreatedHeaderVisible());
+
+        homePage = accountCreatedPage.clickContinueButton();
+        Assert.assertTrue(homePage.isUserLoggedIn());
+
+        homePage.clickOnCart();
+        checkoutPage = cartPage.proceedToCheckout();
+        Assert.assertTrue(checkoutPage.isAddressDetailsHeaderVisible());
+        Assert.assertTrue(checkoutPage.isReviewYourOrderHeaderVisible());
+
+        checkoutPage.writeAComment("This is an example comment");
+        paymentPage = checkoutPage.placeOrder();
+        paymentPage.setPaymentDetails(cardData);
+        paymentDonePage = paymentPage.confirmOrder();
+
+        deleteAccountPage = paymentDonePage.clickOnDeleteAccount();
+        Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
+        deleteAccountPage.clickOnContinue();
     }
 }

@@ -178,3 +178,18 @@ This test case introduces a new concept into the framework: the `ProductActions`
 **Purpose**: This component centralizes reusable UI interaction logic that is specific to product elements (like 'View Product' or 'Add to Cart') but might be shared across multiple page objects (like `HomePage` and `ProductsPage`).
 
 **Benefit**: This keeps the classes cleaner, adhering to the Single Responsibility Principle (SRP) by delegating product-specific actions to the new component.
+
+### ✅ Test Case 14: Place Order: Register While Checkout (Full E2E Flow)
+- **Goal**: Verify the longest and most critical user path: a user adds products to the cart, registers a new account during the checkout process, reviews the order, provides payment details, and successfully places the order, followed by account cleanup.
+- **Concepts**: Complex multistep flow automation, session management, comprehensive validation of all checkout steps, and secure handling of payment inputs.
+
+**Flow**:
+1. **Preparation**: Add product(s) to the cart and click 'Proceed To Checkout'.
+2. **Registration**: Register a new user account during the checkout process (similar to Test Case 1).
+3. **Checkout**: Proceed through the checkout steps, review the address and order.
+4. **Payment**: Enter payment details and confirm the order.
+5. **Verification**: Assert that the order success message is displayed.
+6. **Cleanup**: Delete the newly created account.
+
+#### Key Architectural Enhancements:
+* Payment details are managed using a new `PaymentData` Java Record and a dedicated Data Provider. This introduces a cleaner, more maintainable structure for handling payment test data, showcasing a modern, robust approach to data-driven testing.
