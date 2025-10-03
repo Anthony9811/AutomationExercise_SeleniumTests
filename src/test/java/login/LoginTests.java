@@ -15,6 +15,12 @@ public class LoginTests extends BaseTests {
     SignUpPage signUpPage;
     AccountCreatedPage accountCreatedPage;
     DeleteAccountPage deleteAccountPage;
+    CartPage cartPage;
+    CheckoutPage checkoutPage;
+    PaymentPage paymentPage;
+    PaymentDonePage paymentDonePage;
+    PaymentData cardData = PaymentDataProvider.getTestCardInformation();
+    String cartUrl = "https://www.automationexercise.com/view_cart";
 
     @Test
     public void testUserRegistration() {
@@ -95,12 +101,6 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testRegisterWhileCheckout() {
-        CartPage cartPage;
-        CheckoutPage checkoutPage;
-        PaymentPage paymentPage;
-        PaymentDonePage paymentDonePage;
-        PaymentData cardData = PaymentDataProvider.getTestCardInformation();
-        String cartUrl = "https://www.automationexercise.com/view_cart";
 
         homePage.addProductToCart(2);
         cartPage = homePage.viewCart_OnAddedProduct();
@@ -128,6 +128,48 @@ public class LoginTests extends BaseTests {
         Assert.assertTrue(homePage.isUserLoggedIn());
 
         homePage.clickOnCart();
+        checkoutPage = cartPage.proceedToCheckout();
+        Assert.assertTrue(checkoutPage.isAddressDetailsHeaderVisible());
+        Assert.assertTrue(checkoutPage.isReviewYourOrderHeaderVisible());
+
+        checkoutPage.writeAComment("This is an example comment");
+        paymentPage = checkoutPage.placeOrder();
+        paymentPage.setPaymentDetails(cardData);
+        paymentDonePage = paymentPage.confirmOrder();
+
+        deleteAccountPage = paymentDonePage.clickOnDeleteAccount();
+        Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
+        deleteAccountPage.clickOnContinue();
+    }
+
+    @Test
+    public void testRegisterBeforeCheckout() {
+        loginPage = homePage.clickOnLoginButton();
+        loginPage.setUsername("testname");
+        loginPage.setSignupEmail("tau@testmail.com");
+        signUpPage = loginPage.signUp();
+        Assert.assertTrue(signUpPage.isAccountInformationHeaderVisible());
+
+        signUpPage.selectMrTitle();
+        signUpPage.setPassword("password");
+        signUpPage.selectDateOfBirth("day", "22");
+        signUpPage.selectDateOfBirth("month", "November");
+        signUpPage.selectDateOfBirth("year", "1990");
+        signUpPage.selectAllRegistrationCheckboxes();
+
+        userData = UserDataProvider.createValidUser();
+        signUpPage.setUserInformation(userData);
+
+        accountCreatedPage = signUpPage.clickOnCreateAccountButton();
+        Assert.assertTrue(accountCreatedPage.isAccountCreatedHeaderVisible());
+
+        homePage = accountCreatedPage.clickContinueButton();
+        Assert.assertTrue(homePage.isUserLoggedIn());
+
+        homePage.addProductToCart(2);
+        cartPage = homePage.viewCart_OnAddedProduct();
+        Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
+
         checkoutPage = cartPage.proceedToCheckout();
         Assert.assertTrue(checkoutPage.isAddressDetailsHeaderVisible());
         Assert.assertTrue(checkoutPage.isReviewYourOrderHeaderVisible());
