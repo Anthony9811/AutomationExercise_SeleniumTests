@@ -193,3 +193,16 @@ This test case introduces a new concept into the framework: the `ProductActions`
 
 #### Key Architectural Enhancements:
 * Payment details are managed using a new `PaymentData` Java Record and a dedicated Data Provider. This introduces a cleaner, more maintainable structure for handling payment test data, showcasing a modern, robust approach to data-driven testing.
+
+### ✅ Test Case 15: Place Order: Register Before Checkout (Full E2E Flow)
+- **Goal**: Verify a critical e-commerce path where a user first creates an account, then adds products to the cart, and proceeds directly to checkout as a logged-in user to place the final order.
+- **Concepts**: Complex multistep flow automation, maintaining a persistent logged-in session, and comprehensive validation of the checkout sequence.
+
+**Flow**: The main difference from **Test Case 14** is the execution order of the registration steps relative to the checkout steps.
+
+1. **Registration**: Register a new user account before adding any items to the cart.
+2. **Preparation**: Add product(s) to the cart.
+3. **Checkout**: Proceed directly to checkout as the logged-in user.
+4. **Order Placement**: Review the address, enter payment details, and confirm the order.
+5. **Verification**: Assert that the order success message is displayed.
+6. **Cleanup**: Delete the newly created account.
