@@ -35,4 +35,18 @@ public class CartPageTests extends BaseTests {
                            "4",
                            "The quantity does not match with the expected amount");
     }
+
+    @Test
+    public void testRemoveProductsFromCart() {
+        homePage.addProductToCart(2);
+        homePage.continueShopping();
+        homePage.addProductToCart(3);
+        cartPage = homePage.viewCart_OnAddedProduct();
+        Assert.assertTrue(cartPage.isUserOnCartPage());
+
+        cartPage.removeProductFromCart(1);
+        Assert.assertEquals(cartPage.getProductsCount(),
+                            1,
+                            "The item was not deleted");
+    }
 }

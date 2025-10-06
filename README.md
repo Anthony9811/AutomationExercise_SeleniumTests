@@ -219,3 +219,14 @@ This test case introduces a new concept into the framework: the `ProductActions`
 4. **Order Placement**: Review the address (which should be pre-populated from the user's account), enter payment details, and confirm the order.
 5. **Verification**: Assert that the order success message is displayed.
 6. **Cleanup**: Logout to terminate the user session (replacing the account deletion step).
+
+### ✅ Test Case 17: Remove Products From Cart
+- **Goal**: Verify that a user can successfully remove a specific product from the shopping cart and that the cart's product count is correctly updated.
+- **Concepts**: Adding items to the cart, clicking specific action buttons within a list, and crucial numeric assertion where the verification is based on confirming the product count in the cart has decreased by exactly one.
+
+**Flow**:
+
+1. **Preparation**: Add one or more products to the cart.
+2. **Navigate**: Click the 'View Cart' button and verify the cart page is displayed.
+3. **Removal Action**: Click the 'X' button corresponding to the product intended for removal.
+4. **Verification**: Assert that the product count in the cart has decreased, confirming the item was successfully removed.

@@ -6,11 +6,14 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CartPage extends BasePage {
-
+    String tableLocator = "//div[@class='table-responsive cart_info']";
+    String rowsLocator  = "//tbody/tr[starts-with(@id, 'product-')]";
     private By checkoutButton = By.xpath("//a[normalize-space()='Proceed To Checkout']");
     private By loginButton_OnCheckout = By.xpath("//div[@class='modal-body']//a");
+    private By productRows = By.xpath(tableLocator + rowsLocator);
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -59,5 +62,27 @@ public class CartPage extends BasePage {
         waitForElementToBeVisible(loginButton_OnCheckout);
         clickElement(loginButton_OnCheckout);
         return new LoginPage(driver);
+    }
+
+    /**
+     *
+     * @param productNumber is 1-based, starts from the oldest added product to the most recent
+     */
+    public void removeProductFromCart(int productNumber) {
+        String deleteButtonXPathLocator = "//tr[@id='product-"+ productNumber+"']//a[@class='cart_quantity_delete']";
+        By deleteProductFromCartButton = By.xpath(deleteButtonXPathLocator);
+        clickElement(deleteProductFromCartButton);
+        waitForElementToBeInvisible(deleteProductFromCartButton);
+    }
+
+    public int getProductsCount() {
+        List<WebElement> rows = driver.findElements(productRows);
+        return rows.size();
+    }
+
+    public Boolean isUserOnCartPage() {
+        String cartUrl = "https://www.automationexercise.com/view_cart";
+        waitForUrlToBe(cartUrl);
+        return Objects.equals(driver.getCurrentUrl(), cartUrl);
     }
 }

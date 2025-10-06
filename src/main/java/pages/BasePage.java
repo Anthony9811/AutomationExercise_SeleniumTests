@@ -16,6 +16,7 @@ public class BasePage {
     private By successfulSubscriptionMessage = By.xpath("//div[@class='alert-success alert']");
     private By subscriptionEmailAddress = By.id("susbscribe_email");
     private By subscribeButton = By.id("subscribe");
+    private By continueShoppingButton = By.xpath("//button[normalize-space()='Continue Shopping']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -42,6 +43,10 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
+    public void waitForElementToBeInvisible(By element) {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(element));
+    }
+
     public void waitForUrlToBe(String link) {
         wait.until(ExpectedConditions.urlToBe(link));
     }
@@ -58,6 +63,11 @@ public class BasePage {
         String script = "arguments[0].click();";
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(script, element);
+    }
+
+    public void continueShopping() {
+        waitForElementToBeVisible(continueShoppingButton);
+        clickElement(continueShoppingButton);
     }
 
     /*

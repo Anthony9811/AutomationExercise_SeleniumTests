@@ -13,7 +13,6 @@ public class ProductsPage extends BasePage {
     private By searchButton = By.id("submit_search");
     private By searchedProductsTitle = By.xpath("//h2[normalize-space()='Searched Products']");
     private By foundProductName = By.cssSelector("div[class='single-products'] p");
-    private By continueShoppingButton = By.xpath("//button[normalize-space()='Continue Shopping']");
     private By viewCartButton = By.cssSelector("a[href='/view_cart'");
 
     public ProductsPage(WebDriver driver) {
@@ -24,11 +23,6 @@ public class ProductsPage extends BasePage {
     public void searchProduct(String productName) {
         typeText(searchInputField, productName);
         clickElement(searchButton);
-    }
-
-    public void continueShopping() {
-        waitForElementToBeVisible(continueShoppingButton);
-        clickElement(continueShoppingButton);
     }
 
     public CartPage viewCart() {
