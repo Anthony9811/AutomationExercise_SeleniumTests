@@ -16,7 +16,7 @@ public class ProductsTests extends BaseTests {
 
     @Test
     public void testVerifyAllProducts() {
-        productsPage = homePage.clickOnProducts();
+        productsPage = homePage.goToProducts();
         Assert.assertTrue(productsPage.isUserOnProductsPage());
 
         ProductDetailPage productDetailPage = productsPage.viewProduct(1);
@@ -34,7 +34,7 @@ public class ProductsTests extends BaseTests {
         String productName = "fancy green top";
         String expectedProductName = "Fancy Green Top";
 
-        productsPage = homePage.clickOnProducts();
+        productsPage = homePage.goToProducts();
         Assert.assertTrue(productsPage.isUserOnProductsPage());
 
         productsPage.searchProduct(productName);
@@ -47,7 +47,7 @@ public class ProductsTests extends BaseTests {
     @Test
     public void testAddProductsInCart() {
         CartPage cartPage;
-        productsPage = homePage.clickOnProducts();
+        productsPage = homePage.goToProducts();
         productsPage.addToCart(2);
         productsPage.continueShopping();
 

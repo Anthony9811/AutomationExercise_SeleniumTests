@@ -206,3 +206,16 @@ This test case introduces a new concept into the framework: the `ProductActions`
 4. **Order Placement**: Review the address, enter payment details, and confirm the order.
 5. **Verification**: Assert that the order success message is displayed.
 6. **Cleanup**: Delete the newly created account.
+
+### ✅ Test Case 16: Place Order: Login Before Checkout (Returning User Flow)
+- **Goal**: Verify the full e-commerce path for a returning user who logs in with existing credentials, adds products to the cart, places an order, and then safely logs out to terminate the session.
+- **Concepts**: Complex multistep flow automation, using pre-existing user data, comprehensive validation of all checkout steps, Java Record and Data Provider.
+
+**Flow**:
+
+1. **Login**: Log in with a valid, existing user account before interacting with products.
+2. **Preparation**: Add product(s) to the cart.
+3. **Checkout**: Proceed directly to checkout as the logged-in user.
+4. **Order Placement**: Review the address (which should be pre-populated from the user's account), enter payment details, and confirm the order.
+5. **Verification**: Assert that the order success message is displayed.
+6. **Cleanup**: Logout to terminate the user session (replacing the account deletion step).

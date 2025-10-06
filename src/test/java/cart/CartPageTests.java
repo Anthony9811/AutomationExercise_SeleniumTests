@@ -11,7 +11,7 @@ public class CartPageTests extends BaseTests {
 
     @Test
     public void testVerifySubscriptionOnCartPage() {
-        cartPage = homePage.clickOnCart();
+        cartPage = homePage.goToCart();
         String expectedFooterTitle = "Subscription";
         Assert.assertEquals(cartPage.getFooterTitle(),
                             expectedFooterTitle.toUpperCase(),

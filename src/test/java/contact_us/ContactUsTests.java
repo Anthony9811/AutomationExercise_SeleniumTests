@@ -9,7 +9,7 @@ public class ContactUsTests extends BaseTests {
 
     @Test
     public void testFillContactUsForm() {
-        ContactUsPage contactUsPage = homePage.clickOnContactUs();
+        ContactUsPage contactUsPage = homePage.goToContactUs();
         String relativeFilePath = "src/main/resources/image.jpg";
         String expectedSuccessMessage = "Success! Your details have been submitted successfully.";
 

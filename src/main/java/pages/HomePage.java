@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
         return new LoginPage(driver);
     }
 
-    public void clickOnLogoutButton() {
+    public void logout() {
         clickButton("logout");
     }
 
@@ -37,17 +37,17 @@ public class HomePage extends BasePage {
         productActions.hoverOverProductAndAddToCart(productNumber);
     }
 
-    public ContactUsPage clickOnContactUs() {
+    public ContactUsPage goToContactUs() {
         clickButton("contact_us");
         return new ContactUsPage(driver);
     }
 
-    public TestCasesPage clickOnTestCases() {
+    public TestCasesPage goToTestCases() {
         clickButton("test_cases");
         return new TestCasesPage(driver);
     }
 
-    public ProductsPage clickOnProducts() {
+    public ProductsPage goToProducts() {
         clickButton("products");
         return new ProductsPage(driver);
     }
@@ -56,7 +56,7 @@ public class HomePage extends BasePage {
         return productActions.viewProduct(productNumber);
     }
 
-    public CartPage clickOnCart() {
+    public CartPage goToCart() {
         clickButton("view_cart");
         return new CartPage(driver);
     }
@@ -88,7 +88,7 @@ public class HomePage extends BasePage {
         return isLoggedInAsLocatorDisplayed();
     }
 
-    public DeleteAccountPage clickOnDeleteAccount() {
+    public DeleteAccountPage deleteAccount() {
         clickElement(deleteAccountButton);
         return new DeleteAccountPage(driver);
     }

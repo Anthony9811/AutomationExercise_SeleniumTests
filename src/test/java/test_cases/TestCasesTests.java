@@ -9,7 +9,7 @@ public class TestCasesTests extends BaseTests {
 
     @Test
     public void testVerifyTestCasesPage() {
-        TestCasesPage testCasesPage = homePage.clickOnTestCases();
+        TestCasesPage testCasesPage = homePage.goToTestCases();
 
         Assert.assertTrue(testCasesPage.isUserOnTestCasesPage());
     }

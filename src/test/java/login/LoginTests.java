@@ -50,7 +50,7 @@ public class LoginTests extends BaseTests {
         homePage = accountCreatedPage.clickContinueButton();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
-        deleteAccountPage = homePage.clickOnDeleteAccount();
+        deleteAccountPage = homePage.deleteAccount();
         Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
         deleteAccountPage.clickOnContinue();
     }
@@ -65,7 +65,7 @@ public class LoginTests extends BaseTests {
         loginPage.login();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
-        homePage.clickOnLogoutButton();
+        homePage.logout();
         Assert.assertFalse(homePage.isUserLoggedOut());
     }
 
@@ -127,7 +127,7 @@ public class LoginTests extends BaseTests {
         homePage = accountCreatedPage.clickContinueButton();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
-        homePage.clickOnCart();
+        homePage.goToCart();
         checkoutPage = cartPage.proceedToCheckout();
         Assert.assertTrue(checkoutPage.isAddressDetailsHeaderVisible());
         Assert.assertTrue(checkoutPage.isReviewYourOrderHeaderVisible());
@@ -182,5 +182,33 @@ public class LoginTests extends BaseTests {
         deleteAccountPage = paymentDonePage.clickOnDeleteAccount();
         Assert.assertTrue(deleteAccountPage.isAccountDeletedHeaderVisible());
         deleteAccountPage.clickOnContinue();
+    }
+
+    @Test
+    public void testLoginBeforeCheckOut() {
+        loginPage = homePage.clickOnLoginButton();
+        loginPage.setLoginEmail("doe@testmail.com");
+        loginPage.setLoginPassword("password");
+        loginPage.login();
+        Assert.assertTrue(homePage.isUserLoggedIn());
+
+        homePage.addProductToCart(2);
+        homePage.addProductToCart(3);
+        cartPage = homePage.viewCart_OnAddedProduct();
+        Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
+
+        checkoutPage = cartPage.proceedToCheckout();
+        Assert.assertTrue(checkoutPage.isAddressDetailsHeaderVisible());
+        Assert.assertTrue(checkoutPage.isReviewYourOrderHeaderVisible());
+
+        checkoutPage.writeAComment("This is an example comment");
+        paymentPage = checkoutPage.placeOrder();
+        paymentPage.setPaymentDetails(cardData);
+        paymentDonePage = paymentPage.confirmOrder();
+
+        Assert.assertTrue(paymentDonePage.isConfirmationMessageVisible());
+        paymentDonePage.clickOnContinue();
+        homePage.logout();
+        Assert.assertFalse(homePage.isUserLoggedOut());
     }
 }
