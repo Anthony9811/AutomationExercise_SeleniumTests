@@ -230,3 +230,16 @@ This test case introduces a new concept into the framework: the `ProductActions`
 2. **Navigate**: Click the 'View Cart' button and verify the cart page is displayed.
 3. **Removal Action**: Click the 'X' button corresponding to the product intended for removal.
 4. **Verification**: Assert that the product count in the cart has decreased, confirming the item was successfully removed.
+
+### ✅ Test Case 18: View Category Products (Hierarchical Navigation)
+- **Goal**: Verify the functionality of the product category sidebar by confirming that all categories are visible and that clicking on a category and then a sub-category successfully loads the corresponding filtered product page.
+- **Concepts**: Interacting with collapsible/nested sidebar menus, dynamic link clicking, and asserting that the resulting page content accurately reflects the chosen category.
+
+**Flow**
+
+1. **Verify UI**: Navigate to the home page and assert that the categories section is visible on the left sidebar.
+2. **Primary Navigation**: Click on a main category (e.g., 'Women') to expand its sub-categories.
+3. **Sub-category Navigation**: Click a specific sub-category link (e.g., 'Dress' under 'Women').
+4. **Verification**: Verify that the correct category page is displayed and that a confirmation text (e.g., 'WOMEN - TOPS PRODUCTS') is visible.
+5. ****Secondary Navigation****: Click on a sub-category link from a different main category (e.g., 'Men').
+6. **Final Verification**: Assert that the user is correctly navigated to the second category's page.

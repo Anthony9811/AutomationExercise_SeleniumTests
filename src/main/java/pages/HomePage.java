@@ -3,6 +3,7 @@ package pages;
 import components.ProductActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
     private ProductActions productActions;
@@ -11,6 +12,11 @@ public class HomePage extends BasePage {
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
     private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
     private By viewCartButon_OnAddedProduct = By.xpath("//p[@class='text-center']//a");
+    private By categoriesContainer = By.id("accordian");
+    private By womenCategoryLocator = By.xpath("(//h4[@class='panel-title'])[1]");
+    private By women_DressLocator = By.cssSelector("a[href='/category_products/1']");
+    private By women_TopsLocator = By.cssSelector("a[href='/category_products/2']");
+    private By women_SareeLocator = By.cssSelector("a[href='/category_products/7']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -91,5 +97,36 @@ public class HomePage extends BasePage {
     public DeleteAccountPage deleteAccount() {
         clickElement(deleteAccountButton);
         return new DeleteAccountPage(driver);
+    }
+
+    public Boolean areCategoriesVisible() {
+        return isElementDisplayed(categoriesContainer);
+    }
+
+    public CategoryProductsPage selectWomenSubcategory(String subcategory) {
+        WebElement category = driver.findElement(womenCategoryLocator);
+        WebElement dress = driver.findElement(women_DressLocator);
+        WebElement tops = driver.findElement(women_TopsLocator);
+        WebElement saree = driver.findElement(women_SareeLocator);
+
+        clickWithJS(category);
+        switch (subcategory.toUpperCase()) {
+            case "DRESS":
+                clickWithJS(dress);
+                break;
+
+            case "TOPS":
+                clickWithJS(tops);
+                break;
+
+            case "SAREE":
+                clickWithJS(saree);
+                break;
+
+            default:
+                throw new IllegalArgumentException("Invalid subcategory name provided: " + subcategory);
+        }
+
+        return new CategoryProductsPage(driver);
     }
 }
