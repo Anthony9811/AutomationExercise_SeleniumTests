@@ -3,7 +3,6 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -31,7 +30,8 @@ public class CategoryProductsPage extends BasePage {
 
     public Boolean isUseOnCategoryProductsPage() {
         String url = "https://www.automationexercise.com/category_products";
-        wait.until(ExpectedConditions.urlContains(url));
+        //wait.until(ExpectedConditions.urlContains(url));
+        waitForUrlToContain(url);
         return Objects.requireNonNull(driver.getCurrentUrl()).contains(url);
     }
 

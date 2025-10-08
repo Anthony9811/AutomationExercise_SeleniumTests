@@ -1,9 +1,11 @@
 package products;
 
 import base.BaseTests;
+import data.Brands;
 import data.ExpectedProduct;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BrandsPage;
 import pages.CartPage;
 import pages.ProductDetailPage;
 import pages.ProductsPage;
@@ -75,5 +77,22 @@ public class ProductsTests extends BaseTests {
                                 expected.totalPrice,
                                 "Total price does not match");
         }
+    }
+
+    @Test
+    public void testViewAndCartBrandProducts() {
+        BrandsPage brandsPage;
+        String expectedPageTitle = "BRAND -  " + Brands.Polo +" PRODUCTS";
+        productsPage = homePage.goToProducts();
+        Assert.assertTrue(productsPage.isBrandsContainerVisible());
+
+        brandsPage = productsPage.clickBrand(Brands.Polo);
+        Assert.assertTrue(brandsPage.isUserOnBrandPage());
+        Assert.assertEquals(brandsPage.getBrandProductsTitle(),
+                            expectedPageTitle,
+                            "The titles don't match");
+
+        brandsPage.clickBrand(Brands.HM);
+        Assert.assertTrue(brandsPage.isUserOnBrandPage());
     }
 }

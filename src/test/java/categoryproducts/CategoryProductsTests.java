@@ -13,7 +13,7 @@ public class CategoryProductsTests extends BaseTests {
         String expectedMenSubcategoryLink = "https://www.automationexercise.com/category_products/6"; //or 5 if TSHIRTS is selected
         String womenCategory = "Dress";
         String menCategory = "Jeans";
-        String expectedWomenCategoryMessage = "WOMEN -  " + womenCategory + " PRODUCTS";
+        String expectedWomenCategoryMessage = "WOMEN - " + womenCategory.toUpperCase() + " PRODUCTS";
 
         Assert.assertTrue(homePage.areCategoriesVisible());
         categoryProductsPage = homePage.selectWomenSubcategory(womenCategory);

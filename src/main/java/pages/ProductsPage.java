@@ -14,6 +14,7 @@ public class ProductsPage extends BasePage {
     private By searchedProductsTitle = By.xpath("//h2[normalize-space()='Searched Products']");
     private By foundProductName = By.cssSelector("div[class='single-products'] p");
     private By viewCartButton = By.cssSelector("a[href='/view_cart'");
+    private By brandsContainer = By.className("brands-name");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
@@ -32,6 +33,11 @@ public class ProductsPage extends BasePage {
     public Boolean isSearchedProductsHeaderVisible() {
         waitForElementToBeVisible(searchedProductsTitle);
         return isElementDisplayed(searchedProductsTitle);
+    }
+
+    public Boolean isBrandsContainerVisible() {
+        scrollDown(500);
+        return isElementDisplayed(brandsContainer);
     }
 
     public String getFoundProductName() {

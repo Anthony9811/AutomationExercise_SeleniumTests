@@ -1,5 +1,6 @@
 package pages;
 
+import data.Brands;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -59,6 +60,19 @@ public class BasePage {
         }
     }
 
+    /**
+     *
+     * @param pixels specifies the amount of pixels to scroll down to
+     */
+    public void scrollDown(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, " + pixels + ")");
+    }
+
+    public void waitForUrlToContain(String url) {
+        wait.until(ExpectedConditions.urlContains(url));
+    }
+
     public void clickWithJS(WebElement element) {
         String script = "arguments[0].click();";
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -68,6 +82,14 @@ public class BasePage {
     public void continueShopping() {
         waitForElementToBeVisible(continueShoppingButton);
         clickElement(continueShoppingButton);
+    }
+
+    public BrandsPage clickBrand(Brands brand) {
+        String brandName = brand.getBrandName();
+        String brandLocator = String.format("a[href='/brand_products/%s']", brandName);
+        By brandElement = By.cssSelector(brandLocator);
+        clickElement(brandElement);
+        return new BrandsPage(driver);
     }
 
     /*

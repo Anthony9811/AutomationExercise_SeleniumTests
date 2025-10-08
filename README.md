@@ -243,3 +243,16 @@ This test case introduces a new concept into the framework: the `ProductActions`
 4. **Verification**: Verify that the correct category page is displayed and that a confirmation text (e.g., 'WOMEN - TOPS PRODUCTS') is visible.
 5. ****Secondary Navigation****: Click on a sub-category link from a different main category (e.g., 'Men').
 6. **Final Verification**: Assert that the user is correctly navigated to the second category's page.
+
+### ✅ Test Case 19: View & Cart Brand Products
+- **Goal**: Verify the functionality of the product Brands sidebar by confirming that all brand names are visible and that clicking any brand successfully navigates to a filtered page displaying only that brand's products. The test verifies navigation for multiple brands.
+- **Concepts**: Interacting with collapsible/nested sidebar menus, dynamic link clicking, and asserting that the resulting page content accurately reflects the chosen category.
+
+**Flow**:
+
+1. **Navigate**: Navigate to the site, click on the 'Products' button.
+2. **Verify UI**: Assert that the 'Brands' section is visible on the left sidebar.
+3. **Primary Navigation**: Click on any brand name.
+4. **Verification 1**: Verify that the user is navigated to the correct brand page and that the displayed product list is filtered by that specific brand.
+5. **Secondary Navigation**: Click on another brand link from the sidebar.
+6. **Verification 2**: Verify that the user is successfully navigated to the second brand page and that the products are correctly displayed/filtered.
