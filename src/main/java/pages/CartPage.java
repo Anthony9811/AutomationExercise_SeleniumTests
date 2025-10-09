@@ -14,6 +14,8 @@ public class CartPage extends BasePage {
     private By checkoutButton = By.xpath("//a[normalize-space()='Proceed To Checkout']");
     private By loginButton_OnCheckout = By.xpath("//div[@class='modal-body']//a");
     private By productRows = By.xpath(tableLocator + rowsLocator);
+    private By productName = By.xpath("//td[@class='cart_description']//h4");
+    private By loginButton = By.cssSelector("a[href='/login']");
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -53,14 +55,24 @@ public class CartPage extends BasePage {
         return driver.getCurrentUrl();
     }
 
+    public String getProductName() {
+        waitForElementToBeVisible(productName);
+        return getElementText(productName);
+    }
+
     public CheckoutPage proceedToCheckout() {
         clickElement(checkoutButton);
         return new CheckoutPage(driver);
     }
 
-    public LoginPage goToLogin() {
+    public LoginPage goToLogin_OnCheckout() {
         waitForElementToBeVisible(loginButton_OnCheckout);
         clickElement(loginButton_OnCheckout);
+        return new LoginPage(driver);
+    }
+
+    public LoginPage goToLogin() {
+        clickElement(loginButton);
         return new LoginPage(driver);
     }
 
@@ -84,5 +96,9 @@ public class CartPage extends BasePage {
         String cartUrl = "https://www.automationexercise.com/view_cart";
         waitForUrlToBe(cartUrl);
         return Objects.equals(driver.getCurrentUrl(), cartUrl);
+    }
+
+    public Boolean isProductVisible(String searchedProduct) {
+        return getProductName().equals(searchedProduct);
     }
 }

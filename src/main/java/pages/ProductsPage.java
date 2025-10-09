@@ -13,7 +13,7 @@ public class ProductsPage extends BasePage {
     private By searchButton = By.id("submit_search");
     private By searchedProductsTitle = By.xpath("//h2[normalize-space()='Searched Products']");
     private By foundProductName = By.cssSelector("div[class='single-products'] p");
-    private By viewCartButton = By.cssSelector("a[href='/view_cart'");
+    private By viewCartButton = By.cssSelector("p[class='text-center'] a");
     private By brandsContainer = By.className("brands-name");
 
     public ProductsPage(WebDriver driver) {

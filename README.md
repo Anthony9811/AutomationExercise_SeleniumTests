@@ -246,7 +246,7 @@ This test case introduces a new concept into the framework: the `ProductActions`
 
 ### ✅ Test Case 19: View & Cart Brand Products
 - **Goal**: Verify the functionality of the product Brands sidebar by confirming that all brand names are visible and that clicking any brand successfully navigates to a filtered page displaying only that brand's products. The test verifies navigation for multiple brands.
-- **Concepts**: Interacting with collapsible/nested sidebar menus, dynamic link clicking, and asserting that the resulting page content accurately reflects the chosen category.
+- **Concepts**: Dynamic element clicking, handling product list filtering, and asserting page content (e.g., brand name) reflects the selected filter.
 
 **Flow**:
 
@@ -256,3 +256,17 @@ This test case introduces a new concept into the framework: the `ProductActions`
 4. **Verification 1**: Verify that the user is navigated to the correct brand page and that the displayed product list is filtered by that specific brand.
 5. **Secondary Navigation**: Click on another brand link from the sidebar.
 6. **Verification 2**: Verify that the user is successfully navigated to the second brand page and that the products are correctly displayed/filtered.
+
+### ✅ Test Case 20: Search Products and Verify Cart After Login
+- **Goal**: Verify that items added to the cart while the user is not logged in (anonymous session) are successfully retained, linked, and visible in the cart once the user completes the login process.
+- **Concepts**: Product search and filtering, adding items to cart, performing an authentication (login) mid-test, navigating back to the cart, and asserting the visibility and integrity of the previously added products. This is a crucial test for the site's user experience.
+
+**Flow:**
+
+1. **Preparation (Anonymous)**: Navigate to the Products page, search for an item, and add the product(s) to the cart.
+2. **Verify Anonymous Cart**: Verify that the product(s) are visible in the cart while still logged out.
+3. **Login**: Click 'Signup / Login' and submit valid login details.
+4. **Verification (Logged In)**: Navigate back to the Cart page.
+5. **Critical Assertion**: Verify that the same product(s) are still visible in the cart after the login, confirming successful session and cart persistence.
+
+#### Note: the test can be inconsistent due to ads

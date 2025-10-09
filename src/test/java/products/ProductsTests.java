@@ -5,16 +5,14 @@ import data.Brands;
 import data.ExpectedProduct;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.BrandsPage;
-import pages.CartPage;
-import pages.ProductDetailPage;
-import pages.ProductsPage;
+import pages.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ProductsTests extends BaseTests {
     ProductsPage productsPage;
+    CartPage cartPage;
 
     @Test
     public void testVerifyAllProducts() {
@@ -48,7 +46,6 @@ public class ProductsTests extends BaseTests {
 
     @Test
     public void testAddProductsInCart() {
-        CartPage cartPage;
         productsPage = homePage.goToProducts();
         productsPage.addToCart(2);
         productsPage.continueShopping();
@@ -94,5 +91,30 @@ public class ProductsTests extends BaseTests {
 
         brandsPage.clickBrand(Brands.HM);
         Assert.assertTrue(brandsPage.isUserOnBrandPage());
+    }
+
+    @Test
+    public void testSearchProductsAndVerifyCartAfterLogin() {
+        String productToSearch = "fancy green top";
+        String expectedProductName = "Fancy Green Top";
+
+        productsPage = homePage.goToProducts();
+        Assert.assertTrue(productsPage.isUserOnProductsPage());
+
+        productsPage.searchProduct(productToSearch);
+        Assert.assertEquals(productsPage.getFoundProductName(),
+                expectedProductName,
+                "The product was not found");
+
+        productsPage.addToCart(2);
+        cartPage = productsPage.viewCart();
+        Assert.assertTrue(cartPage.isProductVisible(expectedProductName));
+
+        LoginPage loginPage = cartPage.goToLogin();
+        loginPage.setLoginEmail("doe@testmail.com");
+        loginPage.setLoginPassword("password");
+        loginPage.login();
+        cartPage = homePage.goToCart();
+        Assert.assertTrue(cartPage.isProductVisible(expectedProductName));
     }
 }

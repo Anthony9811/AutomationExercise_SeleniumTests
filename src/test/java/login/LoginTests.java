@@ -107,7 +107,7 @@ public class LoginTests extends BaseTests {
         Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
 
         cartPage.proceedToCheckout();
-        loginPage = cartPage.goToLogin();
+        loginPage = cartPage.goToLogin_OnCheckout();
         loginPage.setUsername("testname");
         loginPage.setSignupEmail("tau@testmail.com");
         signUpPage = loginPage.signUp();
