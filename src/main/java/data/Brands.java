@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum Brands {
-    Polo("Polo"),
+    POLO("Polo"),
     HM("H&M"),
-    MADAME("MADAME"),
-    MAST_HARBOUR("MAST & HARBOUR"),
-    BABYHUG("BABYHUG"),
-    ALLEN_SOLLY_JUNIOR("ALLEN SOLLY JUNIOR"),
-    KOOKIE_KIDS("KOOKIE KIDS"),
-    BIBA("BIBA");
+    MADAME("Madame"),
+    MAST_HARBOUR("Mast & Harbour"),
+    BABYHUG("Babyhug"),
+    ALLEN_SOLLY_JUNIOR("Allen Solly Junior"),
+    KOOKIE_KIDS("Kookie Kids"),
+    BIBA("Biba");
 
     /**
      * -- GETTER --

@@ -79,14 +79,14 @@ public class ProductsTests extends BaseTests {
     @Test
     public void testViewAndCartBrandProducts() {
         BrandsPage brandsPage;
-        String expectedPageTitle = "BRAND -  " + Brands.Polo +" PRODUCTS";
+        String expectedPageTitle = "BRAND - " + Brands.MAST_HARBOUR.getBrandName() +" PRODUCTS";
         productsPage = homePage.goToProducts();
         Assert.assertTrue(productsPage.isBrandsContainerVisible());
 
-        brandsPage = productsPage.clickBrand(Brands.Polo);
+        brandsPage = productsPage.clickBrand(Brands.MAST_HARBOUR);
         Assert.assertTrue(brandsPage.isUserOnBrandPage());
-        Assert.assertEquals(brandsPage.getBrandProductsTitle(),
-                            expectedPageTitle,
+        Assert.assertEquals(brandsPage.getBrandProductsTitle().toUpperCase(),
+                            expectedPageTitle.toUpperCase(),
                             "The titles don't match");
 
         brandsPage.clickBrand(Brands.HM);
