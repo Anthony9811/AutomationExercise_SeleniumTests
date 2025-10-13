@@ -17,6 +17,7 @@ public class HomePage extends BasePage {
     private By women_DressLocator = By.cssSelector("a[href='/category_products/1']");
     private By women_TopsLocator = By.cssSelector("a[href='/category_products/2']");
     private By women_SareeLocator = By.cssSelector("a[href='/category_products/7']");
+    private By recommendedItemsTitle = By.cssSelector("div[class='recommended_items'] h2[class='title text-center']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -41,6 +42,16 @@ public class HomePage extends BasePage {
      */
     public void addProductToCart(int productNumber) {
         productActions.hoverOverProductAndAddToCart(productNumber);
+    }
+
+    /**
+     * @param productId takes values from 1 to 6 only
+     */
+    public void addRecommendedProductToCart(int productId) {
+        String buttonXPathLocator = "//div[@class='carousel-inner']//a[@data-product-id='"+ productId +"']";
+        By addToCartButton_OnRecommended = By.xpath(buttonXPathLocator);
+        waitForElementToBeVisible(addToCartButton_OnRecommended);
+        clickElement(addToCartButton_OnRecommended);
     }
 
     public ContactUsPage goToContactUs() {
@@ -92,6 +103,10 @@ public class HomePage extends BasePage {
 
     public Boolean isUserLoggedOut() {
         return isLoggedInAsLocatorDisplayed();
+    }
+
+    public Boolean isRecommendedItemsTitleVisible() {
+        return isElementDisplayed(recommendedItemsTitle);
     }
 
     public DeleteAccountPage deleteAccount() {

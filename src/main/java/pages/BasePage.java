@@ -53,10 +53,10 @@ public class BasePage {
     }
 
     public void scrollElementIntoView (By element) {
-        String script = "arguments[0].scrollIntoView(true);";
+        String scriptToScrollElementIntoView = "arguments[0].scrollIntoView(true);";
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
         while (!isElementDisplayed(element)) {
-            javascriptExecutor.executeScript(script);
+            javascriptExecutor.executeScript(scriptToScrollElementIntoView);
         }
     }
 
@@ -74,14 +74,20 @@ public class BasePage {
     }
 
     public void clickWithJS(WebElement element) {
-        String script = "arguments[0].click();";
+        String scriptToClick = "arguments[0].click();";
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript(script, element);
+        js.executeScript(scriptToClick, element);
     }
 
     public void continueShopping() {
         waitForElementToBeVisible(continueShoppingButton);
         clickElement(continueShoppingButton);
+    }
+
+    public void scrollToTheBottom() {
+        String scriptToScrollToTheBottom = "window.scrollTo(0, document.body.scrollHeight);";
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(scriptToScrollToTheBottom);
     }
 
     public BrandsPage clickBrand(Brands brand) {
@@ -99,6 +105,7 @@ public class BasePage {
      */
     public void scrollToFooter() {
         scrollElementIntoView(footer);
+        waitForElementToBeVisible(footer);
     }
 
     public String getFooterTitle() {

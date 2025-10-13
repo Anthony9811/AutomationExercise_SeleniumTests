@@ -282,3 +282,16 @@ This test case introduces a new concept into the framework: the `ProductActions`
 3. **Review Input**: Verify that the 'Write Your Review' section is visible.
 4. **Submit**: Enter the required details (name, email, and review message) and click 'Submit'.
 5. **Verification**: Assert that the success message is displayed.
+
+### ✅ Test Case 22: Add to Cart from Recommended Items
+- **Goal**: Verify that the 'RECOMMENDED ITEMS' carousel is visible on the home page and that products can be successfully added to the cart directly from this section.
+- **Concepts**: Scrolling the page (using JavascriptExecutor), verifying dynamically loaded/positioned elements, and basic cart addition/verification flow.
+
+Flow:
+
+1. **Scroll & Verify UI**: Navigate to the home page and scroll to the bottom. Verify the 'RECOMMENDED ITEMS' section is visible.
+2. **Add to Cart**: Click the 'Add To Cart' button on a recommended product.
+3. **View Cart**: Click the 'View Cart' button.
+4. **Verification**: Assert that the recommended product is correctly displayed in the cart page.
+
+Note: This test ensures a critical cross-selling feature is functional across different page sections. However, due to the presence of ads when running the tests it can cause some unexpected and sometimes unavoidable failures.

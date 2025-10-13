@@ -3,6 +3,7 @@ package homepage;
 import base.BaseTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.CartPage;
 
 public class HomePageTests extends BaseTests {
 
@@ -17,5 +18,18 @@ public class HomePageTests extends BaseTests {
         homePage.typeSubscriptionEmail("test@testmail.com");
         homePage.clickSubscribeButton();
         Assert.assertTrue(homePage.isSubscriptionSuccessMessageVisible());
+    }
+
+    @Test
+    public void testAddToCartFromRecommended() {
+        String expectedProductName = "Blue Top";
+        homePage.scrollToTheBottom();
+        Assert.assertTrue(homePage.isRecommendedItemsTitleVisible());
+
+        homePage.addRecommendedProductToCart(1);
+        CartPage cartPage = homePage.viewCart_OnAddedProduct();
+        Assert.assertEquals(cartPage.getProductName(),
+                            expectedProductName,
+                            "The selected product name does not match");
     }
 }

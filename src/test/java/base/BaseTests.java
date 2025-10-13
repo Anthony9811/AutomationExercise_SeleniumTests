@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.HomePage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ public class BaseTests {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-features=PasswordManager");//disables password manager
+        options.addArguments("--disable-popup-blocking");
+        options.addExtensions(new File(System.getProperty("user.dir"), "resources/UBOLite.crx"));
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("credentials_enable_service", false); // Prevents Chrome from offering to save passwords
         prefs.put("profile.password_manager_enabled", false); // Disables the built-in password manager
