@@ -13,13 +13,14 @@ import java.util.List;
 public class ProductsTests extends BaseTests {
     ProductsPage productsPage;
     CartPage cartPage;
+    ProductDetailPage productDetailPage;
 
     @Test
     public void testVerifyAllProducts() {
         productsPage = homePage.goToProducts();
         Assert.assertTrue(productsPage.isUserOnProductsPage());
 
-        ProductDetailPage productDetailPage = productsPage.viewProduct(1);
+        productDetailPage = productsPage.viewProduct(1);
         Assert.assertTrue(productDetailPage.isUserViewingProductDetails());
 
         Assert.assertTrue(productDetailPage.getProductName().contains("Blue Top"));
@@ -47,6 +48,7 @@ public class ProductsTests extends BaseTests {
     @Test
     public void testAddProductsInCart() {
         productsPage = homePage.goToProducts();
+        productsPage.scrollDown(500);
         productsPage.addToCart(2);
         productsPage.continueShopping();
 
@@ -106,6 +108,7 @@ public class ProductsTests extends BaseTests {
                 expectedProductName,
                 "The product was not found");
 
+        productsPage.scrollDown(500);
         productsPage.addToCart(2);
         cartPage = productsPage.viewCart();
         Assert.assertTrue(cartPage.isProductVisible(expectedProductName));
@@ -116,5 +119,22 @@ public class ProductsTests extends BaseTests {
         loginPage.login();
         cartPage = homePage.goToCart();
         Assert.assertTrue(cartPage.isProductVisible(expectedProductName));
+    }
+
+    @Test
+    public void testAddReviewOnProduct() {
+        productsPage = homePage.goToProducts();
+        Assert.assertTrue(productsPage.isUserOnProductsPage());
+
+        productDetailPage = productsPage.viewProduct(1);
+        productDetailPage.scrollDown(400);
+        Assert.assertTrue(productDetailPage.isWriteYourReviewTitleVisible());
+
+        productDetailPage.writeProductReview("Mark",
+                                             "test@testmail.com",
+                                             "Review Example");
+
+        productDetailPage.submitReview();
+        Assert.assertTrue(productDetailPage.isSuccessMessageVisible());
     }
 }

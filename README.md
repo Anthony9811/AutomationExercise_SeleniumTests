@@ -270,3 +270,15 @@ This test case introduces a new concept into the framework: the `ProductActions`
 5. **Critical Assertion**: Verify that the same product(s) are still visible in the cart after the login, confirming successful session and cart persistence.
 
 #### Note: the test can be inconsistent due to ads
+
+### ✅ Test Case 21: Add Review on Product
+- **Goal**: Verify the product review functionality by navigating to a product's detail page, submitting a complete review, and confirming the successful submission message.
+- **Concepts**: Element interaction, form filling, navigation to a detail page, and asserting a transient success message.
+
+**Flow**:
+
+1. **Navigate**: Click the 'Products' button and verify navigation to the 'ALL PRODUCTS' page.
+2. **Product Detail**: Click 'View Product' for any item.
+3. **Review Input**: Verify that the 'Write Your Review' section is visible.
+4. **Submit**: Enter the required details (name, email, and review message) and click 'Submit'.
+5. **Verification**: Assert that the success message is displayed.

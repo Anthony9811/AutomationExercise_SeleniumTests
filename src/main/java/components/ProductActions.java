@@ -21,12 +21,11 @@ public class ProductActions extends BasePage {
     }
 
     public ProductDetailPage viewProduct(int productNumber) {
-        By viewProductButtonLocator = By.cssSelector("a[href='/product_details/"+productNumber+"']");
-        WebElement viewProductButton = driver.findElement(viewProductButtonLocator);
+        By viewProductButton = By.cssSelector("a[href='/product_details/"+productNumber+"']");
 
-        scrollElementIntoView(viewProductButtonLocator);
-        waitForElementToBeVisible(viewProductButtonLocator);
-        clickWithJS(viewProductButton);
+        scrollDown(500);
+        waitForElementToBeVisible(viewProductButton);
+        clickElement(viewProductButton);
         return new ProductDetailPage(driver);
     }
 
@@ -42,10 +41,8 @@ public class ProductActions extends BasePage {
 
         Actions actions = new Actions(driver);
 
-        scrollElementIntoView(productLocator);
         actions.moveToElement(product).perform();
         waitForElementToBeVisible(onHoverAddToCartButtonLocator);
-        WebElement addToCartButton_OnHover = driver.findElement(onHoverAddToCartButtonLocator);
-        clickWithJS(addToCartButton_OnHover);
+        clickElement(onHoverAddToCartButtonLocator);
     }
 }

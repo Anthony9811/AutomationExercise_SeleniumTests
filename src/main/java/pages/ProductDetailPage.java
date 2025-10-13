@@ -20,6 +20,12 @@ public class ProductDetailPage extends BasePage{
     private By quantity = By.id("quantity");
     private By addToCartButton = By.xpath("//button[normalize-space()='Add to cart']");
     private By viewCartButton = By.cssSelector("a[href='/view_cart'");
+    private By writeYourReviewTitle = By.cssSelector("a[href='#reviews']");
+    private By reviewName = By.id("name");
+    private By reviewEmail = By.id("email");
+    private By reviewComment = By.id("review");
+    private By submitButton = By.id("button-review");
+    private By successMessage = By.cssSelector("div[class='alert-success alert'] span");
 
     public ProductDetailPage(WebDriver driver) {
         super(driver);
@@ -65,5 +71,24 @@ public class ProductDetailPage extends BasePage{
 
     public CartPage viewCart() {
         return productActions.viewCart(viewCartButton);
+    }
+
+    public Boolean isWriteYourReviewTitleVisible() {
+        return isElementDisplayed(writeYourReviewTitle);
+    }
+
+    public void writeProductReview(String name, String email, String reviewComment) {
+        typeText(reviewName, name);
+        typeText(reviewEmail, email);
+        typeText(this.reviewComment, reviewComment);
+    }
+
+    public void submitReview() {
+        clickElement(submitButton);
+    }
+
+    public Boolean isSuccessMessageVisible() {
+        waitForElementToBeVisible(successMessage);
+        return isElementDisplayed(successMessage);
     }
 }
