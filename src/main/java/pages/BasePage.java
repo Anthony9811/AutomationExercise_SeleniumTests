@@ -18,6 +18,7 @@ public class BasePage {
     private By subscriptionEmailAddress = By.id("susbscribe_email");
     private By subscribeButton = By.id("subscribe");
     private By continueShoppingButton = By.xpath("//button[normalize-space()='Continue Shopping']");
+    private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -96,6 +97,11 @@ public class BasePage {
         By brandElement = By.cssSelector(brandLocator);
         clickElement(brandElement);
         return new BrandsPage(driver);
+    }
+
+    public DeleteAccountPage deleteAccount() {
+        clickElement(deleteAccountButton);
+        return new DeleteAccountPage(driver);
     }
 
     /*

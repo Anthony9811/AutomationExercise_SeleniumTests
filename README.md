@@ -295,3 +295,16 @@ Flow:
 4. **Verification**: Assert that the recommended product is correctly displayed in the cart page.
 
 Note: This test ensures a critical cross-selling feature is functional across different page sections. However, due to the presence of ads when running the tests it can cause some unexpected and sometimes unavoidable failures.
+
+### ✅ Test Case 23: Verify Address Details in Checkout Page
+- **Goal**: Verify that the delivery and billing address details displayed on the checkout page are identical to the address information provided by the user during the initial account registration.
+- **Concepts**: Complex E2E flow, cross-page data comparison, extracting and asserting large blocks of text (address details), and robust teardown (account deletion) to maintain a clean state.
+
+Flow:
+
+1. **Registration**: Register a new user account, filling in all address details (delivery/billing address).
+2. **Preparation**: Add product(s) to the cart.
+3. **Checkout**: Click 'Cart' and then 'Proceed To Checkout' as the logged-in user.
+4. **Verification**: On the checkout page, extract the text of both the displayed delivery and billing addresses.
+5. **Data Integrity Check**: Assert that these displayed addresses match the data stored in the initial UserInformation data object.
+6. **Cleanup**: Delete the newly created account.

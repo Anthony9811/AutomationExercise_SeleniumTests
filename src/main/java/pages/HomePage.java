@@ -10,7 +10,6 @@ public class HomePage extends BasePage {
 
     private By carousel = By.id("slider-carousel");
     private By loggedInAsLocator = By.cssSelector("li:nth-child(10) a:nth-child(1)");
-    private By deleteAccountButton = By.cssSelector("a[href='/delete_account']");
     private By viewCartButon_OnAddedProduct = By.xpath("//p[@class='text-center']//a");
     private By categoriesContainer = By.id("accordian");
     private By womenCategoryLocator = By.xpath("(//h4[@class='panel-title'])[1]");
@@ -107,11 +106,6 @@ public class HomePage extends BasePage {
 
     public Boolean isRecommendedItemsTitleVisible() {
         return isElementDisplayed(recommendedItemsTitle);
-    }
-
-    public DeleteAccountPage deleteAccount() {
-        clickElement(deleteAccountButton);
-        return new DeleteAccountPage(driver);
     }
 
     public Boolean areCategoriesVisible() {

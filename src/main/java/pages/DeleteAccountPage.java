@@ -12,6 +12,7 @@ public class DeleteAccountPage extends BasePage{
     }
 
     public Boolean isAccountDeletedHeaderVisible() {
+        waitForElementToBeVisible(accountDeletedTitle);
         return isElementDisplayed(accountDeletedTitle);
     }
 
