@@ -101,7 +101,7 @@ public class LoginTests extends BaseTests {
 
     @Test
     public void testRegisterWhileCheckout() {
-
+        homePage.scrollDown(500);
         homePage.addProductToCart(2);
         cartPage = homePage.viewCart_OnAddedProduct();
         Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
@@ -166,6 +166,7 @@ public class LoginTests extends BaseTests {
         homePage = accountCreatedPage.clickContinueButton();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
+        homePage.scrollDown(500);
         homePage.addProductToCart(2);
         cartPage = homePage.viewCart_OnAddedProduct();
         Assert.assertEquals(cartPage.getUrl(), cartUrl, "Cart page is not being displayed");
@@ -192,6 +193,7 @@ public class LoginTests extends BaseTests {
         loginPage.login();
         Assert.assertTrue(homePage.isUserLoggedIn());
 
+        homePage.scrollDown(500);
         homePage.addProductToCart(2);
         homePage.addProductToCart(3);
         cartPage = homePage.viewCart_OnAddedProduct();

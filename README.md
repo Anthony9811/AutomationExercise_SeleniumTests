@@ -287,7 +287,7 @@ This test case introduces a new concept into the framework: the `ProductActions`
 - **Goal**: Verify that the 'RECOMMENDED ITEMS' carousel is visible on the home page and that products can be successfully added to the cart directly from this section.
 - **Concepts**: Scrolling the page (using JavascriptExecutor), verifying dynamically loaded/positioned elements, and basic cart addition/verification flow.
 
-Flow:
+**Flow**:
 
 1. **Scroll & Verify UI**: Navigate to the home page and scroll to the bottom. Verify the 'RECOMMENDED ITEMS' section is visible.
 2. **Add to Cart**: Click the 'Add To Cart' button on a recommended product.
@@ -300,7 +300,7 @@ Note: This test ensures a critical cross-selling feature is functional across di
 - **Goal**: Verify that the delivery and billing address details displayed on the checkout page are identical to the address information provided by the user during the initial account registration.
 - **Concepts**: Complex E2E flow, cross-page data comparison, extracting and asserting large blocks of text (address details), and robust teardown (account deletion) to maintain a clean state.
 
-Flow:
+**Flow**:
 
 1. **Registration**: Register a new user account, filling in all address details (delivery/billing address).
 2. **Preparation**: Add product(s) to the cart.
@@ -308,3 +308,15 @@ Flow:
 4. **Verification**: On the checkout page, extract the text of both the displayed delivery and billing addresses.
 5. **Data Integrity Check**: Assert that these displayed addresses match the data stored in the initial UserInformation data object.
 6. **Cleanup**: Delete the newly created account.
+
+### ✅ Test Case 24: Download Invoice After Purchase Order (Full E2E + Download)
+- **Goal**: Validate the final step of the customer journey: the ability to receive and download a legal document (the invoice) after a successful purchase. The test covers registration, placing an order, verifying the success message, clicking the "Download Invoice" button, and verifying the file is successfully saved to the disk.
+- **Concepts**: Complex E2E flow, handling file downloads in Selenium, checking file system integrity, and robust teardown (account deletion).
+
+**Flow**:
+
+1. **Registration & Login**: Register a new user account during the checkout process (similar to Test Case 14).
+2. **Order Placement**: Add product(s) to the cart, proceed through checkout, review details, and submit payment information.
+3. **Invoice Download**: After confirming the success message, click the 'Download Invoice' button.
+4. **Verification**: Assert that the success message is displayed, and then verify that the invoice file was successfully downloaded to the local file system.
+5. **Cleanup**: Delete the newly created account.

@@ -38,6 +38,7 @@ public class CartPageTests extends BaseTests {
 
     @Test
     public void testRemoveProductsFromCart() {
+        homePage.scrollDown(550);
         homePage.addProductToCart(2);
         homePage.continueShopping();
         homePage.addProductToCart(3);

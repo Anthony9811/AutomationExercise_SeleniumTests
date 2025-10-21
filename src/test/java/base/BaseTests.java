@@ -15,8 +15,10 @@ public class BaseTests {
     private WebDriver driver;
     protected HomePage homePage;
 
+
     @BeforeClass
     public void setUp() {
+        String downloadPath = System.getProperty("user.dir") + File.separator + "Downloads";
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-features=PasswordManager");//disables password manager
         options.addArguments("--disable-popup-blocking");
@@ -26,6 +28,8 @@ public class BaseTests {
         prefs.put("profile.password_manager_enabled", false); // Disables the built-in password manager
         prefs.put("profile.password_manager_leak_detection", false); // Disables password leak detection warnings
         prefs.put("autofill.profile_enabled", false); // Disables autofill for addresses and other forms
+        prefs.put("profile.default_content_settings.popups", 0);
+        prefs.put("download.default_directory", downloadPath);
         options.setExperimentalOption("prefs", prefs);
 
         driver = new ChromeDriver(options);
