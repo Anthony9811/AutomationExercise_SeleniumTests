@@ -331,3 +331,14 @@ Note: This test ensures a critical cross-selling feature is functional across di
 2. **Verify Footer**: Assert that the 'SUBSCRIPTION' section in the footer is visible.
 3. **Scroll Up Action**: Click the 'Arrow' button (fixed at the bottom right) to move upward.
 4. **Verification**: Assert that the page has scrolled completely up and that key text from the top of the page (e.g., 'Full-Fledged practice website for Automation Engineers') is now visible on the screen.
+
+### ✅ Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down
+- **Goal**: Verify the page's standard scrolling functionality by programmatically scrolling down to the footer and then using a separate JavaScript command to scroll all the way back up to the page top. This validates basic page navigation independent of the fixed UI elements.
+- **Concepts**: Advanced use of JavascriptExecutor to programmatically control page position, specifically demonstrating the ability to scroll to the absolute bottom and then to the absolute top (scrollTo(0, 0)).
+
+**Flow**:
+
+1. **Scroll Down**: Navigate to the home page and use a command to scroll the page down to the bottom.
+2. **Verify Footer**: Assert that the 'SUBSCRIPTION' section in the footer is visible.
+3. **Scroll Up Action**: Use a different JavaScript command to scroll the page up to the top.
+4. **Verification**: Assert that the page has scrolled completely up and that the key introductory text ('Full-Fledged practice website for Automation Engineers') is visible on the screen.

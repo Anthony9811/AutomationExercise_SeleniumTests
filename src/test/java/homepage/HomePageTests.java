@@ -42,4 +42,14 @@ public class HomePageTests extends BaseTests {
         homePage.scrollUpUsingButton();
         Assert.assertTrue(homePage.isTheSiteSubtitleVisible());
     }
+
+    @Test
+    public void testScrollUpWithoutUsingArrow() {
+        homePage.scrollToTheBottom();
+        Assert.assertEquals(homePage.getFooterTitle().toUpperCase(),
+                "SUBSCRIPTION",
+                "The title is not visible");
+        homePage.scrollToTheTop();
+        Assert.assertTrue(homePage.isTheSiteSubtitleVisible());
+    }
 }

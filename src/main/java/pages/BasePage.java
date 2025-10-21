@@ -91,6 +91,17 @@ public class BasePage {
         js.executeScript(scriptToScrollToTheBottom);
     }
 
+    public void scrollToTheTop() {
+        String scriptToScrollToTheTop = """
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth'
+                });""";
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript(scriptToScrollToTheTop);
+    }
+
     public BrandsPage clickBrand(Brands brand) {
         String brandName = brand.getBrandName();
         String brandLocator = String.format("a[href='/brand_products/%s']", brandName);
