@@ -17,6 +17,8 @@ public class HomePage extends BasePage {
     private By women_TopsLocator = By.cssSelector("a[href='/category_products/2']");
     private By women_SareeLocator = By.cssSelector("a[href='/category_products/7']");
     private By recommendedItemsTitle = By.cssSelector("div[class='recommended_items'] h2[class='title text-center']");
+    private By scrollUpButton = By.id("scrollUp");
+    private By siteSubtitle  = By.xpath("//div[@class='item active']//h2");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -110,6 +112,15 @@ public class HomePage extends BasePage {
 
     public Boolean areCategoriesVisible() {
         return isElementDisplayed(categoriesContainer);
+    }
+
+    public void scrollUpUsingButton() {
+        clickElement(scrollUpButton);
+    }
+
+    public Boolean isTheSiteSubtitleVisible() {
+        waitForElementToBeVisible(siteSubtitle);
+        return isElementDisplayed(siteSubtitle);
     }
 
     public CategoryProductsPage selectWomenSubcategory(String subcategory) {

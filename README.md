@@ -320,3 +320,14 @@ Note: This test ensures a critical cross-selling feature is functional across di
 3. **Invoice Download**: After confirming the success message, click the 'Download Invoice' button.
 4. **Verification**: Assert that the success message is displayed, and then verify that the invoice file was successfully downloaded to the local file system.
 5. **Cleanup**: Delete the newly created account.
+
+### ✅ Test Case 25: Verify Scroll Up Using 'Arrow' Button and Scroll Down
+- **Goal**: Verify that the scroll functionality works correctly in both directions: programmatically scrolling down to reveal the footer, and then using the fixed 'Arrow' button to instantly scroll back up to the top of the page.
+- **Concepts**: Simulating scroll-down to the bottom of the page (using JavascriptExecutor), interacting with fixed/floating action buttons (the scroll-up arrow), and verifying element visibility based on page position.
+
+**Flow**:
+
+1. **Scroll Down**: Navigate to the home page and programmatically scroll the page down to the bottom.
+2. **Verify Footer**: Assert that the 'SUBSCRIPTION' section in the footer is visible.
+3. **Scroll Up Action**: Click the 'Arrow' button (fixed at the bottom right) to move upward.
+4. **Verification**: Assert that the page has scrolled completely up and that key text from the top of the page (e.g., 'Full-Fledged practice website for Automation Engineers') is now visible on the screen.

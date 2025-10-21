@@ -32,4 +32,14 @@ public class HomePageTests extends BaseTests {
                             expectedProductName,
                             "The selected product name does not match");
     }
+
+    @Test
+    public void testScrollUpUsingArrowButton() {
+        homePage.scrollToTheBottom();
+        Assert.assertEquals(homePage.getFooterTitle().toUpperCase(),
+                            "SUBSCRIPTION",
+                            "The title is not visible");
+        homePage.scrollUpUsingButton();
+        Assert.assertTrue(homePage.isTheSiteSubtitleVisible());
+    }
 }
