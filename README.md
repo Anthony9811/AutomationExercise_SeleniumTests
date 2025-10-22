@@ -5,6 +5,9 @@ This project is an End-to-End (E2E) test automation suite developed using Seleni
 
 It's built on the **Page Object Model (POM)** architecture to ensure high maintainability and code reusability, serving as a robust portfolio piece that demonstrates best practices in web automation.
 
+### ⚠️Special Note On Test Runs
+The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Tried different ways to solve it, but sadly the ads still appear anyway. 
+
 # 🛠️ Technology Stack
 * **Language**: Java 17+.
 * **Test Framework**: TestNG.
