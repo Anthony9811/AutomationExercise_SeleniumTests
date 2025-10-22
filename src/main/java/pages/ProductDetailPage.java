@@ -18,8 +18,8 @@ public class ProductDetailPage extends BasePage{
     private By condition = By.xpath("//div[@class='product-information']/p[3]");
     private By brand = By.xpath("//div[@class='product-information']/p[4]");
     private By quantity = By.id("quantity");
-    private By addToCartButton = By.xpath("//button[normalize-space()='Add to cart']");
-    private By viewCartButton = By.cssSelector("a[href='/view_cart'");
+    private By addToCartButton = By.xpath("(//button[normalize-space()='Add to cart'])[1]");
+    private By viewCartButton = By.xpath("//p[@class='text-center']//a");
     private By writeYourReviewTitle = By.cssSelector("a[href='#reviews']");
     private By reviewName = By.id("name");
     private By reviewEmail = By.id("email");
@@ -33,6 +33,7 @@ public class ProductDetailPage extends BasePage{
     }
 
     public Boolean isUserViewingProductDetails() {
+        waitForUrlToContain("product_details");
         return Objects.requireNonNull(driver.getCurrentUrl()).contains("product_details");
     }
 
