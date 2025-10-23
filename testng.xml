@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/ajort/IdeaProjects/AutomationExercise_SeleniumTests/src/test/java">
+        <classes>
+            <class name="cart.CartPageTests">
+                <methods>
+                    <include name="testVerifySubscriptionOnCartPage"/>
+                    <include name="testVerifyProductQuantityInCart"/>
+                    <include name="testRemoveProductsFromCart"/>
+                </methods>
+            </class>
+            <class name="categoryproducts.CategoryProductsTests">
+                <methods>
+                    <include name="testViewCategoryProducts"/>
+                </methods>
+            </class>
+            <class name="checkout.CheckoutTests">
+                <methods>
+                    <include name="testVerifyAddressDetailsOnCheckout"/>
+                </methods>
+            </class>
+            <class name="contact_us.ContactUsTests">
+                <methods>
+                    <include name="testFillContactUsForm"/>
+                </methods>
+            </class>
+            <class name="homepage.HomePageTests">
+                <methods>
+                    <include name="testVerifySubscriptionOnHomePage"/>
+                    <include name="testAddToCartFromRecommended"/>
+                    <include name="testScrollUpUsingArrowButton"/>
+                    <include name="testScrollUpWithoutUsingArrow"/>
+                </methods>
+            </class>
+            <class name="login.LoginTests">
+                <methods>
+                    <include name="testUserRegistration"/>
+                    <include name="testCorrectUserLogin"/>
+                    <include name="testIncorrectUserLogin"/>
+                    <include name="testExistingEmailRegistration"/>
+                    <include name="testRegisterWhileCheckout"/>
+                    <include name="testRegisterBeforeCheckout"/>
+                    <include name="testLoginBeforeCheckOut"/>
+                </methods>
+            </class>
+            <class name="paymentdone.PaymentDoneTests">
+                <methods>
+                    <include name="testDownloadInvoiceAfterPurchase"/>
+                </methods>
+            </class>
+            <class name="products.ProductsTests">
+                <methods>
+                    <include name="testVerifyAllProducts"/>
+                    <include name="testSearchAProduct"/>
+                    <include name="testAddProductsInCart"/>
+                    <include name="testViewAndCartBrandProducts"/>
+                    <include name="testSearchProductsAndVerifyCartAfterLogin"/>
+                    <include name="testAddReviewOnProduct"/>
+                </methods>
+            </class>
+            <class name="test_cases.TestCasesTests">
+                <methods>
+                    <include name="testVerifyTestCasesPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
