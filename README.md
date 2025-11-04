@@ -5,13 +5,14 @@ This project is an End-to-End (E2E) test automation suite developed using Seleni
 
 It's built on the **Page Object Model (POM)** architecture to ensure high maintainability and code reusability, serving as a robust portfolio piece that demonstrates best practices in web automation.
 
-### ⚠️Special Note On Test Runs
-The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Tried different ways to solve it, but sadly the ads still appear anyway. 
+## ⚠️Special Note On Test Runs
+### The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Unfortunately, this also means that if a test creates an account that and it fails somewhere after it's created and before it's deleted, then future tests that require registration will also fail unless the account is deleted. If necessary, the credentials are `tau@testmail.com` & `password`. Tried different ways to solve the ads issue, but sadly they still show up. 
 
 # 🛠️ Technology Stack
 * **Language**: Java 17+.
 * **Test Framework**: TestNG.
 * **Automation Tool**: Selenium WebDriver.
+* **Reporting**: ExtentReports (Generates rich, interactive HTML reports).
 * **Architecture**: Page Object Model (POM).
 * **Build Tool**: Maven.
 
@@ -20,6 +21,23 @@ The websites shows advertisements at the bottom with varying sizes, which result
 * `src/main/java/data`: Contains Data Objects (POJOs) (e.g., `UserInformation.java`). These models cleanly pass structured test data to the Page Objects.
 * `src/test/java/tests`: Contains the TestNG test classes. These define the high-level test logic and assertions.
 * `pom.xml`: Defines all project dependencies and build settings.
+
+## 📈 Enhanced Reporting with ExtentReports
+The framework incorporates ExtentReports to move beyond the basic console output of TestNG.
+
+### Key Features of ExtentReports Implementation:
+* **HTML Dashboard**: Generates a single, beautiful HTML file that acts as a comprehensive dashboard, viewable on any browser.
+* **Test Status Visualization**: Provides clear pass/fail statistics, execution time, and graphical charts summarizing the suite's performance.
+* **Detailed Step Logging**: Every critical action and assertion within a test (e.g., "Navigated to Checkout Page," "Verified Account Created!") is logged directly into the report, making debugging faster.
+* **Failure Analysis (Crucial)**: Includes logic to automatically capture and attach screenshots directly to the report whenever a test method fails. This provides instant visual context for the failure, drastically reducing time spent reproducing bugs.
+
+### How to Access the Report
+The latest report will be generated and saved here:
+
+`/test-output/TestReport.html`
+
+Simply open this file in any web browser to view the complete test suite results.
+
 ## ⚙️ Test Automation Concepts Demonstrated
 The framework showcases stability and professional design through the following techniques:
 
@@ -345,3 +363,5 @@ Note: This test ensures a critical cross-selling feature is functional across di
 2. **Verify Footer**: Assert that the 'SUBSCRIPTION' section in the footer is visible.
 3. **Scroll Up Action**: Use a different JavaScript command to scroll the page up to the top.
 4. **Verification**: Assert that the page has scrolled completely up and that the key introductory text ('Full-Fledged practice website for Automation Engineers') is visible on the screen.
+
+### Test Reporting & Utility Features
