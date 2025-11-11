@@ -1,6 +1,7 @@
 package api.products;
 
 import api.base.BaseSpec;
+import io.restassured.http.Method;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,14 +27,14 @@ public class ProductsApiTests {
 
     @Test(description = "API 2: Post to all products list")
     public void testPostToAllProductsList() {
-        //IT FAILS DUE TO AN API ERROR
+        //ALWAYS RETURNS 200 INSTEAD OF 405
         response = given()
                 .spec(BaseSpec.getBaseRequestSpec())
                 .when()
-                .post(PRODUCTSLIST_ENDPOINT)
+                .request(Method.POST, PRODUCTSLIST_ENDPOINT)
                 .then()
                 .extract().response();
-        Assert.assertEquals(response.statusCode(), 405, "The response message does not match the expected");
+        Assert.assertEquals(response.statusCode(), 405, "The response code does not match the expected");
     }
 
     @Test(description = "API 5: Post to search product")
@@ -50,11 +51,11 @@ public class ProductsApiTests {
 
     @Test(description = "API 6: Search product without parameter")
     public void testPostToSearchProductWithoutParameter() {
-        //IT FAILS DUE TO AN API ERROR
+        //ALWAYS RETURNS 200 INSTEAD OF 405
         response = given()
                 .spec(BaseSpec.getBaseRequestSpec())
                 .when()
-                .post(SEARCHPRODUCT_ENDPOINT)
+                .request(Method.POST, SEARCHPRODUCT_ENDPOINT)
                 .then()
                 .extract().response();
         Assert.assertEquals(response.statusCode(), 400, "The response message does not match the expected");
