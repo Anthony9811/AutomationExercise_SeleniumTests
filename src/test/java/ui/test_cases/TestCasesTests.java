@@ -1,4 +1,4 @@
-package test_cases;
+package ui.test_cases;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

@@ -1,4 +1,4 @@
-package checkout;
+package ui.checkout;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

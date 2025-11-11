@@ -1,4 +1,4 @@
-package contact_us;
+package ui.contact_us;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

@@ -1,4 +1,4 @@
-package cart;
+package ui.cart;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

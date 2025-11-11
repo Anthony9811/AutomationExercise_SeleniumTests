@@ -1,4 +1,4 @@
-package login;
+package ui.login;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

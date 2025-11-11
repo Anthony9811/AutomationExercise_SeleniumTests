@@ -1,4 +1,4 @@
-package homepage;
+package ui.homepage;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

@@ -1,4 +1,4 @@
-package paymentdone;
+package ui.paymentdone;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

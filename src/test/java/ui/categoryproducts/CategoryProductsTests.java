@@ -1,4 +1,4 @@
-package categoryproducts;
+package ui.categoryproducts;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;

@@ -1,4 +1,4 @@
-package products;
+package ui.products;
 
 import base.BaseTests;
 import com.aventstack.extentreports.Status;
