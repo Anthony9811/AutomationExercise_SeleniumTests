@@ -15,13 +15,42 @@ public class LoginService {
                 .when()
                     .post(endpoint)
                 .then()
-                    .statusCode(200) // Assert common conditions here
+                    .statusCode(200)
                     .extract().response();
 
         // Handle the bad response format internally
         String jsonString = response.htmlPath().getString("html.body");
 
         // Return the clean JSON path for assertions in the test
+        return new JsonPath(jsonString);
+    }
+
+    public JsonPath verifyLoginWithoutEmail(String endpoint, String password) {
+        Response response = given()
+                .spec(BaseSpec.getBaseRequestSpec())
+                .formParam("password", password)
+                .when()
+                    .post(endpoint)
+                .then()
+                    .statusCode(200)
+                    .extract().response();
+
+        String jsonString = response.htmlPath().getString("html.body");
+
+        return new JsonPath(jsonString);
+    }
+
+    public JsonPath deleteToVerifyLogin(String endpoint) {
+        Response response = given()
+                .spec(BaseSpec.getBaseRequestSpec())
+                .when()
+                    .delete(endpoint)
+                .then()
+                    .statusCode(200)
+                    .extract().response();
+
+        String jsonString = response.htmlPath().getString("html.body");
+
         return new JsonPath(jsonString);
     }
 }
