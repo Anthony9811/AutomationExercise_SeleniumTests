@@ -7,9 +7,10 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class LoginService {
+    Response response;
 
     public JsonPath verifyLogin(String endpoint, String email, String password) {
-        Response response = given()
+        response = given()
                 .spec(BaseSpec.getBaseRequestSpec())
                 .formParams("email", email, "password", password)
                 .when()
@@ -26,7 +27,7 @@ public class LoginService {
     }
 
     public JsonPath verifyLoginWithoutEmail(String endpoint, String password) {
-        Response response = given()
+        response = given()
                 .spec(BaseSpec.getBaseRequestSpec())
                 .formParam("password", password)
                 .when()
@@ -41,7 +42,7 @@ public class LoginService {
     }
 
     public JsonPath deleteToVerifyLogin(String endpoint) {
-        Response response = given()
+        response = given()
                 .spec(BaseSpec.getBaseRequestSpec())
                 .when()
                     .delete(endpoint)
