@@ -64,8 +64,8 @@ public class AccountActionsApiTests {
         String password = "password";
         String expectedResponseMessage = "Account deleted!";
 
-        payload.put("email", "tau@testmail.com");
-        payload.put("password", "password");
+        payload.put("email", email);
+        payload.put("password", password);
 
         responseJson = accountsService.deleteUserAccount(CREATEACCOUNT_ENDPOINT, payload);
         assertThat("The internal response code should be 200",
