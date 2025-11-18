@@ -17,7 +17,27 @@ public class AccountsService {
     }
 
     public JsonPath deleteUserAccount(String endpoint, Map<String, Object> payload) {
-        return executeRequest(Method.POST, endpoint, payload, 200);
+        return executeRequest(Method.DELETE, endpoint, payload, 200);
+    }
+
+    public JsonPath updateUserAccount(String endpoint, Map<String, Object> payload) {
+        return executeRequest(Method.PUT, endpoint, payload, 200);
+    }
+
+    public JsonPath getUserDetailByEmail(String endpoint, String email) {
+        Response response = given()
+                .spec(BaseSpec.getBaseRequestSpec())
+                .queryParam("email", email)
+                .when()
+                    .get(endpoint)
+                .then()
+                    .assertThat()
+                    .statusCode(200)
+                    .extract().response();
+
+        String jsonString = response.htmlPath().getString("html.body");
+
+        return new JsonPath(jsonString);
     }
 
     private JsonPath executeRequest(Method method, String endpoint, Map<String, Object> payload, int expectedStatusCode) {

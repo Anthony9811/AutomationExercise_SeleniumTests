@@ -14,7 +14,7 @@ public class BrandsService {
                     .post(endpoint)
                 .then()
                     .statusCode(201)
-                .extract().response();
+                    .extract().response();
 
         String jsonString = response.htmlPath().getString("html.body");
 
