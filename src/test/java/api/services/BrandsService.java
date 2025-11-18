@@ -13,7 +13,7 @@ public class BrandsService {
                 .when()
                     .post(endpoint)
                 .then()
-                    .statusCode(200)
+                    .statusCode(201)
                 .extract().response();
 
         String jsonString = response.htmlPath().getString("html.body");
