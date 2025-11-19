@@ -6,12 +6,12 @@ This project is an End-to-End (E2E) test automation suite developed using Seleni
 It's built on the **Page Object Model (POM)** architecture to ensure high maintainability and code reusability, serving as a robust portfolio piece that demonstrates best practices in web automation.
 
 ## ⚠️Special Note On Test Runs
-### The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Unfortunately, this also means that if a test creates an account that and it fails somewhere after it's created and before it's deleted, then future tests that require registration will also fail unless the account is deleted. If necessary, the credentials are `tau@testmail.com` & `password`. Tried different ways to solve the ads issue, but sadly they still show up. 
+### The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Unfortunately, this also means that if a test creates an account but fails somewhere after it's created and before it's deleted, then future tests that require registration will also fail unless the account is deleted. If necessary, the credentials are `tau@testmail.com` & `password`. Tried different ways to solve the ads issue, but sadly they still show up. 
 
 # 🛠️ Technology Stack
 * **Language**: Java 17+.
 * **Test Framework**: TestNG.
-* **Automation Tool**: Selenium WebDriver.
+* **Automation Tools**: Selenium WebDriver, RestAssured (for API Tests).
 * **Reporting**: ExtentReports (Generates rich, interactive HTML reports).
 * **Architecture**: Page Object Model (POM).
 * **Build Tool**: Maven.
@@ -46,7 +46,7 @@ The framework showcases stability and professional design through the following 
 
 ### Stability & Robustness
 * **Explicit Waits**: `WebDriverWait` and `ExpectedConditions` are used throughout to prevent flaky tests by ensuring elements are ready for interaction (present, visible, or clickable).
-* **Advanced Interaction**: `JavascriptExecutor` is utilized to handle complex UI scenarios, such as scrolling elements into the viewport to bypass common `ElementClickInterceptedException` issues.
+* **Advanced Interaction**: `JavascriptExecutor` is utilized to handle complex UI scenarios, such as scrolling elements into the viewport to bypass common `ElementClickInterceptedException` issues when possible.
 
 ### Flow Control
 * **Setup Assertions**: The prerequisite check ("Verify home page is visible") is executed within a shared `@BeforeMethod` block. If this configuration fails, all associated test methods are automatically **skipped**, guaranteeing a known starting state and preventing irrelevant test failures.
@@ -70,8 +70,8 @@ You have a few options for running the tests:
   Use the following command to run all tests in the project:
   `mvn clean test`
 
-- **Using the TestNG Suite (NOT AVAILABLE YET):**
-  Open the project in your IDE _(preferably IntelliJ IDEA)_ and right-click on the `testng.xml` file. Select the "Run" option to execute the entire test suite.
+- **Using the TestNG Suite:**
+  Open the project in your IDE _(**preferably IntelliJ IDEA**)_ and right-click on the `testng.xml` file. Select the "Run" option to execute the entire test suite.
 
 ## 📋 Implemented UI Test Cases
 ### ✅ Test Case 1: Register User
@@ -431,10 +431,3 @@ The `automationexercise.com` API exhibits a defect where certain negative endpoi
 #### ✅ API 14: GET User Account Detail by Email (GET `/getUserDetailByEmail`)
 * **Objective**: Validate the retrieval of a specific user's account details using their email address.
 * **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms that the response body (User Detail JSON) contains the expected user information.
-
-### 🔧📊Test Reporting & Utility Features
-This section highlights key framework functionalities that improve test reliability and reporting.
-
-* **Enhanced Screenshot Capture**: The framework now features a robust screenshot utility that captures a visual snapshot of the page for every test outcome: pass, fail, and skip. All screenshots are dynamically named after the test method that generated them, providing a clear and organized visual record of the entire test run, which is invaluable for debugging and report generation.
-* **ExtentReports Integration**: This project now includes integration with ExtentReports to generate rich, interactive HTML reports for every test execution. The reports provide detailed information on test results, helping to quickly identify and analyze failures. After running the tests, the final report named `TestsReport.html` can be found in the `test-output` folder.
-* **Report Fixes & Cleanup**: The framework was updated to ensure that all captured screenshots now correctly appear within the ExtentReports HTML report. A new feature was also added to automatically clean up screenshots from previous runs, preventing a buildup of files in the project directory.
