@@ -16,10 +16,6 @@ public class LoginApiTests {
 
     @Test(description = "API 7: POST To Verify Login with valid details")
     public void testPostToVerifyLoginWithValidDetails() {
-        /*
-        MUST EXPLAIN IN THE README THAT I HAD TO USE A SERVICE TO ACCOMPLISH THE DESIRED RESULT
-        BECAUSE THE NORMAL APPROACH DOES NOT WORK DUE TO THE RESPONSE'S CONTENT TYPE
-         */
         String expectedResponseMessage = "User exists!";
 
         JsonPath responseJson = loginService.verifyLogin(VERIFYLOGIN_ENDPOINT, EMAIL_PARAMETER, PASSWORD_PARAMETER);

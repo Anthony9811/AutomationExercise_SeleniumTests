@@ -73,7 +73,7 @@ You have a few options for running the tests:
 - **Using the TestNG Suite (NOT AVAILABLE YET):**
   Open the project in your IDE _(preferably IntelliJ IDEA)_ and right-click on the `testng.xml` file. Select the "Run" option to execute the entire test suite.
 
-## 📋 Implemented Test Cases
+## 📋 Implemented UI Test Cases
 ### ✅ Test Case 1: Register User
 - **Goal**: Verify the full user lifecycle: successful account creation, confirmed login status, and subsequent account deletion with final confirmation.
 - **Concepts**: Multi-page navigation, form filling (using data providers), handling radio buttons/dropdowns, text validation for successful login, and final confirmation of account deletion.
@@ -364,4 +364,77 @@ Note: This test ensures a critical cross-selling feature is functional across di
 3. **Scroll Up Action**: Use a different JavaScript command to scroll the page up to the top.
 4. **Verification**: Assert that the page has scrolled completely up and that the key introductory text ('Full-Fledged practice website for Automation Engineers') is visible on the screen.
 
-### Test Reporting & Utility Features
+## 💻 API Test Automation (RestAssured)
+This section details the API endpoints that have been automated using RestAssured, showcasing comprehensive validation of user, product, and brand management functionalities.
+
+### ⚠️ NOTE ON API DEFECTS & ROBUSTNESS
+The `automationexercise.com` API exhibits a defect where certain negative endpoints (for example API 2, API 4, & API 6) incorrectly return an HTTP Status Code of **200 (OK)** even when an internal error (like 400 or 405) occurs. To ensure reliable testing, the framework implements a custom parsing layer (such as `ProductsService`). This layer extracts the true JSON error message and internal code from the HTML body of the response, allowing for correct and robust assertion of the expected error state across all affected negative test scenarios.
+
+### 🛍️ Products and Brands (Read Operations)
+#### ✅ API 1: Get All Products List (GET `/productsList`)
+
+* **Objective**: Verify that the API returns a comprehensive list of all products in the database.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and validates the JSON response body structure.
+
+#### ✅ API 2: Post To All Products List (POST `/productsList`)
+* **Objective**: Validate that the API correctly handles invalid requests to this read-only endpoint.
+* **Verification**: Asserts an HTTP status code of **405 (Method Not Allowed)** for attempting a POST on a GET endpoint (utilizing the custom parsing fix).
+
+#### ✅ API 3: Get All Brands List (GET `/brandsList`)
+* **Objective**: Verify that the API returns a comprehensive list of all product brands.
+* **Verification**: Asserts an HTTP status code of 200 (OK) and validates the response body structure.
+
+#### ✅ API 4: PUT To All Brands List (PUT `/brandsList`)
+* **Objective**: Validate that the API correctly handles invalid requests to this read-only endpoint.
+* **Verification**: Asserts an HTTP status code of **405 (Method Not Allowed)** for using the incorrect HTTP method (utilizing the custom parsing fix).
+
+#### ✅ API 5: POST To Search Product (POST `/searchProduct`)
+* **Objective**: Validate the search functionality by sending a product name and asserting that only relevant products are returned in the response.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and validates that the name of the returned product matches the search query.
+
+### 👤 User Authentication and Lifecycle (CRUD)
+
+#### ✅ API 6: POST To Verify Login with Invalid Details (POST `/verifyLogin`)
+* **Objective**: Validate the negative login scenario, ensuring the API rejects invalid credentials.
+* **Verification**: Asserts an HTTP status code of **405 (Bad Request)** indicating authentication failure (utilizing the custom parsing fix).
+
+#### ✅ API 7: POST To Verify Login with Valid Credentials (POST `/verifyLogin`)
+* **Objective**: Validate that the API endpoint successfully authenticates an existing user.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms the presence of the response message: "User exists!".
+
+#### ✅ API 8: POST To Create/Register User (POST `/createAccount`)
+* **Objective**: Validate the user registration endpoint by sending a complete payload of user details.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms the successful creation message.
+
+#### ✅ API 9: PUT To Update User Account (PUT `/updateAccount`)
+* **Objective**: Validate the ability to modify existing user data (such as name, address, password) after successful registration.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and verifies that the response confirms the account update success.
+
+#### ✅ API 10: GET User Account Detail (GET `/getUserDetailByEmail`)
+* **Objective**: Validate the retrieval of a specific user's account details using their email.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms that the returned JSON data matches the expected user's details.
+
+#### ✅ API 11: POST To Delete User Account (POST `/deleteAccount`)
+* **Objective**: Validate the user account deletion endpoint, ensuring an account is permanently removed from the system.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms the successful deletion message.
+
+### 🔑 Final User Management Tests
+
+#### ✅ API 12: DELETE User Account (DELETE `/deleteAccount`)
+* **Objective**: Validate the user account deletion endpoint using the DELETE method.
+* **Verification**: The test successfully asserts the documented HTTP status code of **200 (OK)** and confirms the response message: "Account deleted!".
+
+#### ✅ API 13: PUT To Update User Account (PUT `/updateAccount`)
+* **Objective**: Validate the ability to successfully update a user's account details using the PUT method.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms the success message: "User updated!".
+
+#### ✅ API 14: GET User Account Detail by Email (GET `/getUserDetailByEmail`)
+* **Objective**: Validate the retrieval of a specific user's account details using their email address.
+* **Verification**: Asserts an HTTP status code of **200 (OK)** and confirms that the response body (User Detail JSON) contains the expected user information.
+
+### 🔧📊Test Reporting & Utility Features
+This section highlights key framework functionalities that improve test reliability and reporting.
+
+* **Enhanced Screenshot Capture**: The framework now features a robust screenshot utility that captures a visual snapshot of the page for every test outcome: pass, fail, and skip. All screenshots are dynamically named after the test method that generated them, providing a clear and organized visual record of the entire test run, which is invaluable for debugging and report generation.
+* **ExtentReports Integration**: This project now includes integration with ExtentReports to generate rich, interactive HTML reports for every test execution. The reports provide detailed information on test results, helping to quickly identify and analyze failures. After running the tests, the final report named `TestsReport.html` can be found in the `test-output` folder.
+* **Report Fixes & Cleanup**: The framework was updated to ensure that all captured screenshots now correctly appear within the ExtentReports HTML report. A new feature was also added to automatically clean up screenshots from previous runs, preventing a buildup of files in the project directory.
