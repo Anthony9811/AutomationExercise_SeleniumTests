@@ -1,9 +1,17 @@
 # 🌐 Automation Exercise E2E Test Suite
 
 ## Project Overview
-This project is an End-to-End (E2E) test automation suite developed using Selenium WebDriver and Java, focused on validating the test cases from www.automationexercise.com.
+* **Objective**: A robust, industry-standard framework designed for comprehensive E2E testing of the "Automation Exercise" platform.
 
-It's built on the **Page Object Model (POM)** architecture to ensure high maintainability and code reusability, serving as a robust portfolio piece that demonstrates best practices in web automation.
+* **Key Technical Features**:
+
+   * **Hybrid Framework**: Combines UI testing (Selenium WebDriver) with API validation (RestAssured).
+
+   * **Fluent Page Object Model**: Implemented a method-chaining approach to make test scripts read like natural language.
+
+   * **Custom Wait Utility**: Developed a centralized synchronization manager to handle dynamic elements and AJAX transitions.
+
+   * **Data-Driven Testing**: Utilized external data sources to validate multiple scenarios with a single test script.
 
 ## ⚠️Special Note On Test Runs
 ### The websites shows advertisements at the bottom with varying sizes, which results in inconsistencies with some tests that sometimes fail due to this in one run, but are successful when they run a second time, so it is likely that some of them don't pass due to the 'Element click intercepted' exception. Unfortunately, this also means that if a test creates an account but fails somewhere after it's created and before it's deleted, then future tests that require registration will also fail unless the account is deleted. If necessary, the credentials are `tau@testmail.com` & `password`. Tried different ways to solve the ads issue, but sadly they still show up. 
